@@ -59,8 +59,8 @@ export class PostDetailPage {
   loadMoreComments(infiniteScroll) {
     let page = (this.comments.length/10) + 1;
     this.wordpressProvider.getComments(this.post.id, page)
-    .subscribe(data: any[] => {
-      for(let item of data){
+    .subscribe(data1 => {
+      for(let item of data1){
         this.comments.push(item);
       }
       infiniteScroll.complete();
