@@ -48,8 +48,8 @@ export class EditPostPage {
     let loading = this.loadingCtrl.create();
 
     loading.present();    
-    this.pname = this.post.title.rendered;
-    this.pdescription = this.post.content.rendered;
+    this.pname = this.post['title'].rendered;
+    this.pdescription = this.post['content'].rendered;
     loading.dismiss();
     this.post_edit_form = this.formBuilder.group({
       
