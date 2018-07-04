@@ -37,9 +37,9 @@ export class PostDetailPage {
       this.getCategories(),
       this.getComments())
       .subscribe(data => {
-        this.user = data['name'];
-        this.categories = data['categories'];
-        this.comments = data['comments'];
+        this.user = data[0]['name'];
+        this.categories = data[1];
+        this.comments = data[2];
         
       });
   }
@@ -59,14 +59,14 @@ export class PostDetailPage {
   loadMoreComments(infiniteScroll) {
     let page = (this.comments.length/10) + 1;
     this.wordpressProvider.getComments(this.post.id, page)
-    .subscribe(data1 => {
-      for(let item of data1){
+    .subscribe(data => {
+      for(let item of data){
         this.comments.push(item);
       }
       infiniteScroll.complete();
     }, err => {
       console.log(err);
-      
+      this.morePagesAvailable = false;
     })
   }
   
