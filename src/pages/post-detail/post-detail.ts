@@ -38,8 +38,8 @@ export class PostDetailPage {
       this.getComments())
       .subscribe(data => {
         this.user = data['name'];
-        this.categories = data['cate'];
-        this.comments = data['cmt'];
+        this.categories = data['categories'];
+        this.comments = data['comments'];
         
       });
   }
