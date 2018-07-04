@@ -63,7 +63,7 @@ export class EditPostPage {
   }
   
   updateProduct(values){
-    this.wordpressProvider.editPost(values, this.post.id).subscribe(data => {
+    this.wordpressProvider.editPost(values, this.post['id']).subscribe(data => {
 		  console.log(data);
 		alert('Post is Completely Edited!');
 		this.navCtrl.setRoot('PostsPage');
