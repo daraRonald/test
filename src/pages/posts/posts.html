@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar>
+	<button ion-button menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Posts</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onGoToCreatePost()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="content">
+  
+	  <ion-card *ngFor="let post of posts" >
+		<ion-card-content >
+		  <ion-card-title [innerHTML]="post.title.rendered"></ion-card-title>
+		  <p [innerHTML]="post.excerpt.rendered"></p>
+		</ion-card-content>
+		<ion-row no-padding>
+		   <ion-col>
+			 <button ion-button clear small color="primary" icon-start>
+			   {{post.date.split('T')[0]}}
+			 </button>
+		   </ion-col>
+		   <ion-col text-right>
+			 <button ion-button small color="primary" (click)="onShowPostDetail(post)" icon-start>
+				Read More
+			 </button>
+		   </ion-col>
+		 </ion-row>
+	  </ion-card>
+	  <ion-infinite-scroll [enabled]="morePagesAvailable" (ionInfinite)="doInfinite($event)">
+		<ion-infinite-scroll-content
+		loadingSpinner="bubbles"
+		loadingText="Loading more posts ...">
+		</ion-infinite-scroll-content>
+	  </ion-infinite-scroll>
+
+</ion-content>

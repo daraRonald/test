@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar color="themecolor">
+	<button ion-button menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Edit Product
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="form-content" *ngIf="product">
+  <form class="form" [formGroup]="post_edit_form"  (ngSubmit)="updateProduct(post_edit_form.value)">
+		
+	<ion-list>
+	
+		<ion-item>
+		  <ion-label color="primary">Name :</ion-label>
+		  <ion-input type="text" formControlName="pname" [(ngModel)]="pname"></ion-input>
+		</ion-item>
+		
+		<ion-item>
+		  <ion-label color="primary">Description :</ion-label>
+		  <ion-input type="text" formControlName="pdescription" [(ngModel)]="pdescription"></ion-input>
+		</ion-item>
+		
+    </ion-list>
+    
+    <br>
+    <button ion-button full type="submit" [disabled]="!post_edit_form.valid">Update</button>
+  </form>
+</ion-content>

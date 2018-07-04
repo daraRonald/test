@@ -1,0 +1,74 @@
+<ion-header>
+
+  <ion-navbar>
+	<button ion-button menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{post.title.rendered}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+     <h1>{{post.title.rendered}}</h1> 
+    </ion-card-header>
+    <ion-card-content>
+		
+	 <div class="post-content" [innerHTML]="post.content.rendered"></div>
+	 <br>
+	    <p class="bold-title">Details:</p>
+		<ion-row>
+		  <ion-col>
+			<ion-icon name='md-calendar'></ion-icon>
+			{{post.date.split('T')[0]}}
+		  </ion-col>
+		  <ion-col text-right>
+			<ion-icon name="person"></ion-icon>
+			{{user}}
+		  </ion-col>
+		</ion-row>
+		
+		<p class="bold-title">Categories:</p>
+		<ion-grid>
+		  <ion-row>
+			<ion-col class="category-col" *ngFor="let category of categories">
+			  <ion-badge (click)="goToCategoryPosts(category.id, category.name)">{{category.name}}</ion-badge>
+			</ion-col>
+		  </ion-row>
+		</ion-grid>
+		
+		<p class="bold-title">Comments:</p>
+		<ion-item *ngFor="let comment of comments">
+		  <ion-avatar item-start>
+			<img src="{{comment.author_avatar_urls[24]}}">
+		  </ion-avatar>
+		  <h2>{{comment.author_name}}</h2>
+		  <p [innerHTML]="comment.content.rendered"></p>
+		</ion-item>
+		
+		<ion-infinite-scroll [enabled]="morePagesAvailable" (ionInfinite)="loadMoreComments($event)">
+		  <ion-infinite-scroll-content
+		  loadingSpinner="bubbles"
+		  loadingText="Loading more comments...">
+		  </ion-infinite-scroll-content>
+		</ion-infinite-scroll>   
+    </ion-card-content>
+  </ion-card>
+
+	<ion-row>
+		<ion-col col-6>
+		  <button ion-button color="primary" small (click)="editPost(post)">
+			
+			<div>Edit</div>
+		  </button>
+		</ion-col>
+		<ion-col col-6>
+		  <button ion-button color="danger" small (click)="deletePost(post.id)">
+			
+			<div>Delete</div>
+		  </button>
+		</ion-col>
+	 </ion-row>
+</ion-content>

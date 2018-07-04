@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title><span [innerHTML]="selectedItem.name"></span></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+ <div *ngIf="selectedItem" class="selection">
+
+ 	<ion-slides pager>
+
+	  <ion-slide *ngFor="let image of selectedItem.images">
+	    <img src="{{image.src}}" />
+	  </ion-slide>
+
+	</ion-slides>
+
+    <h2 [innerHTML]="selectedItem.name"></h2>
+
+    <p *ngIf="selectedItem.price && !selectedItem.sale_price" class="product-price">${{selectedItem.price}}</p>
+
+    <p *ngIf="selectedItem.sale_price" class="product-price">Sale! ${{selectedItem.sale_price}}</p>
+
+	<div *ngIf="description" [innerHTML]="description"></div>
+
+	<p *ngIf="selectedItem.average_rating != '0.00'" class="product-rating"><em>Rating: {{selectedItem.average_rating}} stars</em></p>
+
+	<p *ngIf="selectedItem.count" class="product-count"><em>Count: {{selectedItem.count}}</em></p>
+	
+	<p *ngIf="selectedItem.in_stock" class="product-stock">✓ In Stock.</p>
+
+	
+	<ion-row>
+		<ion-col col-6>
+		  <button ion-button color="primary" small (click)="editProduct()">
+			
+			<div>Edit</div>
+		  </button>
+		</ion-col>
+		<ion-col col-6>
+		  <button ion-button color="danger" small (click)="deleteProduct(selectedItem)">
+			
+			<div>Delete</div>
+		  </button>
+		</ion-col>
+	 </ion-row>
+ </div>
+</ion-content>

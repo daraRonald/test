@@ -4,12 +4,25 @@
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <ion-content>
+  
+   <ion-content class="card-background-page">
+	<ion-card>
+      <img src="./assets/images/2.png" />
+      <div class="card-title">T-WORK SYSTEM</div>
+      <div class="card-subtitle">Find Your Journey</div>
+    </ion-card>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
+		
+		<button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+			{{p.title}}
+		</button>
+		
+		<div padding>
+			<button ion-button block icon-left class="menu-login-button" (click)="openLoginModal()">
+			<ion-icon name="log-in"></ion-icon>
+			<span *ngIf="login_data">Logout</span><span *ngIf="!login_data">Login</span></button>
+		</div>
+		
     </ion-list>
   </ion-content>
 
