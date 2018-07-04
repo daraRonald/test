@@ -15,7 +15,7 @@ import 'rxjs/add/observable/forkJoin';
 export class EditPostPage {
    product_edit_form: FormGroup;
  
-  product: Array<any> = new Array<any>();
+  post: Array<any> = new Array<any>();
   id : any;
   
   pid :any;
