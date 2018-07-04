@@ -32,15 +32,11 @@ export class PostDetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostDetailPage');
     
-    Observable.forkJoin(
-      this.getAuthorData(),
-      this.getCategories(),
-      this.getComments())
-      .subscribe(data => {
-        this.user = data[0]['name'];
-        this.categories = data[1];
-        this.comments = data[2];
-        
+    Observable.forkJoin({0 : this.getAuthorData().subscribe(data => {
+        this.user = data}), 1 : this.getCategories().subscribe(data => {
+        this.categories = data}), 3 :this.getComments().subscribe(data => {
+        this.comments = data
+        })
       });
   }
   
