@@ -13,7 +13,7 @@ import 'rxjs/add/observable/forkJoin';
   templateUrl: 'editpost.html'
 })
 export class EditPostPage {
-   product_edit_form: FormGroup;
+   post_edit_form: FormGroup;
  
   post: Array<any> = new Array<any>();
   id : any;
