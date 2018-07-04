@@ -37,9 +37,9 @@ export class PostDetailPage {
       this.getCategories(),
       this.getComments())
       .subscribe(data => {
-        this.user = data[0]['name'];
-        this.categories = data[1];
-        this.comments = data[2];
+        this.user = data['name'];
+        this.categories = data['cate'];
+        this.comments = data['cmt'];
         
       });
   }
