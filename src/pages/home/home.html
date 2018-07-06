@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar>
+	<button ion-button menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    
     <ion-title *ngIf="categoryTitle">{{categoryTitle}} posts</ion-title>
+    <ion-title *ngIf="!categoryTitle">Posts</ion-title>
   </ion-navbar>
 </ion-header>
 
