@@ -37,7 +37,7 @@ export class HomePage {
 
       this.wordpressProvider.getRecentPosts(this.categoryId)
       .subscribe(data => {
-		let posts : string[] = data;
+		let posts : any = data;
         for(let post of posts){
           post.excerpt.rendered = post.excerpt.rendered.split('<a')[0] + "</p>";
           this.posts.push(post);
@@ -59,7 +59,7 @@ export class HomePage {
 
     this.wordpressProvider.getRecentPosts(this.categoryId, page)
     .subscribe(data => {
-      let posts : string[] = data;
+      let posts : any = data;
       for(let post of posts){
         if(!loading){
           infiniteScroll.complete();
