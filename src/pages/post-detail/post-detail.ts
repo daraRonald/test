@@ -67,13 +67,14 @@ export class PostDetailPage {
     let page = (this.comments.length/10) + 1;
     this.wordpressProvider.getComments(this.post.id, page)
     .subscribe(data => {
-      for(let item of data){
+    let items : any = data;
+      for(let item of items){
         this.comments.push(item);
       }
       infiniteScroll.complete();
     }, err => {
       console.log(err);
-      this.morePagesAvailable = false;
+      
     })
   }
   
