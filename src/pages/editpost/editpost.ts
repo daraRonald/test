@@ -13,17 +13,16 @@ import 'rxjs/add/observable/forkJoin';
   templateUrl: 'editpost.html'
 })
 export class EditPostPage {
-   post_edit_form: FormGroup;
- 
-  post: Array<any> = new Array<any>();
-  id : any;
+
+  post_edit_form: FormGroup;
+
+  name : string;
   
-  pid :any;
-  pname :string;
+  postname :string;
  
-  pdescription : string;
+  postdescription : string;
  
-		  
+  post : any;	  
   placeholder_picture = "assets/images/pimage.png";
   
   constructor(
@@ -37,8 +36,8 @@ export class EditPostPage {
 		this.post= navParams.get('post');
 		console.log(this.post);
 		this.post_edit_form = this.formBuilder.group({
-		  pname: new FormControl('', Validators.required),
-		  pdescription : new FormControl('', Validators.required),
+		  postname: new FormControl('', Validators.required),
+		  postdescription : new FormControl('', Validators.required),
 		  
 		});
   }
@@ -48,22 +47,24 @@ export class EditPostPage {
     let loading = this.loadingCtrl.create();
 
     loading.present();    
-    this.pname = this.post['title'].rendered;
-    this.pdescription = this.post['content'].rendered;
+    this.name = this.post['title'];
+    this.postname = this.name['rendered'];
+    let content = this.post['content'];
+    this.postdescription = content['rendered'];
     loading.dismiss();
     this.post_edit_form = this.formBuilder.group({
       
-      pname : this.pname,
+      postname : this.postname,
 	  
-	  pdescription : this.pdescription,
+	  postdescription : this.postdescription,
 	  
     });
   
     
   }
   
-  updateProduct(values){
-    this.wordpressProvider.editPost(values, this.post['id']).subscribe(data => {
+  updatePost(values){
+    this.wordpressProvider.editPost(values, this.post.id).subscribe(data => {
 		  console.log(data);
 		alert('Post is Completely Edited!');
 		this.navCtrl.setRoot('PostsPage');

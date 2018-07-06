@@ -22,7 +22,7 @@ export class PostDetailPage {
  
   post: any;
   user: string;
-  comments: any[];
+  comments: any;
   categories: Array<any> = new Array<any>();
   constructor(public navCtrl: NavController, public navParams: NavParams, private wordpressProvider: WordpressProvider) {
     this.post = this.navParams.get('post');
@@ -32,11 +32,15 @@ export class PostDetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostDetailPage');
     
-    Observable.forkJoin({'0' : this.getAuthorData().subscribe(data => {
-        this.user = data}), '1' : this.getCategories().subscribe(data => {
-        this.categories = data}), '3' :this.getComments().subscribe(data => {
-        this.comments = data
-        })
+    Observable.forkJoin(
+      this.getAuthorData(),
+      this.getCategories(),
+      this.getComments())
+      .subscribe(data => {
+        this.user = data[0]['name'];
+        this.categories = data[1];
+        this.comments = data[2];
+        
       });
   }
   
@@ -50,6 +54,13 @@ export class PostDetailPage {
 
   getComments(){
     return this.wordpressProvider.getComments(this.post.id);
+  }
+  
+  goToCategoryPosts(categoryId, categoryTitle){
+    this.navCtrl.push('HomePage', {
+      id: categoryId,
+      title: categoryTitle
+    })
   }
   
   loadMoreComments(infiniteScroll) {

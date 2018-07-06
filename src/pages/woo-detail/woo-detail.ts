@@ -132,11 +132,10 @@ export class WooDetailPage {
 
 	}
 
-	editProduct() {
+	editProduct(editProduct:any) {
 		console.log('View Product Edit Page');
-		
-
-		
+		this.navCtrl.setRoot('EditProductPage',{editProduct});
+			
 	}
 
 	deleteProduct(deldata) {
