@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+	<button ion-button menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    
+    <ion-title *ngIf="orders">Orders</ion-title>
+    
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="content">
+  <ion-card *ngFor="let order of orders" >
+    
+    <ion-card-title><h2>Order Number : {{order.id}}</h2> ({{order.status}})</ion-card-title>
+    <ion-card-content> 
+		
+    </ion-card-content>
+    <ion-row no-padding>
+       <ion-col>
+         <button ion-button clear small color="primary" icon-start>
+           {{order.date_created.split('T')[0]}}
+         </button>
+       </ion-col>
+       <ion-col text-right>
+         <button ion-button small color="primary" (click)="postTapped($event, order)" icon-start>
+            Read More
+         </button>
+       </ion-col>
+     </ion-row>
+  </ion-card>
+  <ion-infinite-scroll [enabled]="morePagesAvailable" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Loading more posts ...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

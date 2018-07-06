@@ -15,10 +15,12 @@ export class WordpressProvider {
   api_url = environment.site_url+environment.data_url;
   api_url_create_post = environment.site_url+environment.posts_url;
   api_url_create_product = environment.site_url+environment.products_url;
-  api_url_delete_product = environment.site_url+environment.products_url+'/';
-
+  api_url_order = environment.site_url+environment.orders_url;
+ 
+  
   constructor(public http: HttpClient) {
     console.log('Hello PostsProvider Provider');
+   
   }
 
   getRecentPosts(categoryId:number, page:number = 1){
@@ -179,4 +181,15 @@ export class WordpressProvider {
     return this.http.put(this.api_url_create_product+'/'+id, data, {headers: headers});
   }
 
+  getOrders(page:number = 1) {
+	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+	  console.log(token);
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  let url = this.api_url_order;
+	return this.http.get(url, {headers: headers} );
+  }
 }

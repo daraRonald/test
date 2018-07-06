@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { WordpressProvider} from '../../providers/wordpress/wordpress';
+import { WordpressProvider} from '../../../providers/wordpress/wordpress';
 
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';

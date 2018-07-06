@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, ModalController, Events } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Storage } from '@ionic/storage';
-import { WooProvider } from '../../providers/woocommerce/woocommerce';
-import { WordpressProvider} from '../../providers/wordpress/wordpress';
+import { WooProvider } from '../../../providers/woocommerce/woocommerce';
+import { WordpressProvider} from '../../../providers/wordpress/wordpress';
 
 
 @IonicPage()

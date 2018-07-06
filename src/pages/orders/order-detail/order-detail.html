@@ -1,0 +1,124 @@
+<ion-header>
+
+  <ion-navbar>
+	<button ion-button menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{order.id}} ({{order.status}})</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+		<div class="segment">
+		  <ion-segment [(ngModel)]="orderform">
+			<ion-segment-button value="order-item">
+			  Order Data
+			</ion-segment-button>
+			<ion-segment-button value="customer-data">
+			  Customer Details
+			</ion-segment-button>
+		  </ion-segment>
+		</div>
+		<div [ngSwitch]="orderform">
+		
+		  <ion-list *ngSwitchCase="'order-item'">
+			
+			<div class="body">
+				<div class="currencies">
+					  <ion-row class="order-header">
+						<ion-col col-3>
+						  <p class="rank">Product</p> 
+						</ion-col>
+						<ion-col col-2 class="text">
+						  <p class="name">Qty</p>
+						</ion-col>
+						<ion-col col-3 class="text">
+						  <p class="rank">Price</p>
+						</ion-col>
+						<ion-col col-4 class="text">
+						  <p class="usd">Total</p>
+						  
+						</ion-col>
+					  </ion-row>
+					  <ion-row class="currency" *ngFor="let item of items;let count=index">
+						<ion-col col-3>
+						  <p class="rank">{{item.name}} {{item.product_id}}</p> 
+						</ion-col>
+						<ion-col col-2 class="text">
+						  <p class="name">{{item.quantity}}</p>
+						</ion-col>
+						<ion-col col-3 class="text">
+						  <p class="rank">{{item.price}} {{order.currency}}</p>
+						</ion-col>
+						<ion-col col-4 class="text">
+						  <p class="usd">{{item.total}} {{order.currency}}</p>
+						  
+						</ion-col>
+					  </ion-row>
+					  <ion-row class="currency">
+						<ion-col col-6 class="text">
+						  <p class="rank">Total</p>
+						</ion-col>
+						<ion-col col-6 class="text-total">
+						  <p class="usd">{{order.total}} {{order.currency}}</p>
+						  
+						</ion-col>
+					  </ion-row>
+					
+				  </div>
+			  </div>
+		  </ion-list>
+		 
+		  <ion-list *ngSwitchCase="'customer-data'">
+			<div class="body">
+				<div class="currencies">
+					  <ion-row class="currency">
+						<ion-col col-4>
+						  <p class="rank">First Name :</p> 
+						</ion-col>
+						<ion-col col-8 class="text">
+						  <p class="name">{{billing.first_name}} {{billing.last_name}}</p>
+						</ion-col>
+					  </ion-row>
+					  <ion-row class="currency">
+						<ion-col col-4>
+						  <p class="rank">Company :</p> 
+						</ion-col>
+						<ion-col col-8 class="text">
+						  <p class="name">{{billing.company}}</p>
+						</ion-col>
+					  </ion-row>
+					  <ion-row class="currency">
+						<ion-col col-4>
+						  <p class="rank">Address :</p> 
+						</ion-col>
+						<ion-col col-8 class="text">
+						  <p class="name">{{billing.address_1}}<br>{{billing.address_2}}<br>{{billing.city}}<br>{{billing.state}}<br>{{billing.postcode}}<br>{{billing.country}}</p>
+						</ion-col>
+					  </ion-row>
+					  <ion-row class="currency">
+						<ion-col col-4>
+						  <p class="rank">Email :</p> 
+						</ion-col>
+						<ion-col col-8 class="text">
+						  <p class="name">{{billing.email}}</p>
+						</ion-col>
+					  </ion-row>
+					  <ion-row class="currency">
+						<ion-col col-4>
+						  <p class="rank">Phone :</p> 
+						</ion-col>
+						<ion-col col-8 class="text">
+						  <p class="name">{{billing.phone}}</p>
+						</ion-col>
+					  </ion-row>
+				  </div>
+			  </div>
+			
+		  </ion-list>
+		
+		</div>
+    
+	
+</ion-content>

@@ -22,7 +22,9 @@ export class MyApp {
       { title: 'Home', component: 'HomePage' },
       { title: 'Posts', component: 'PostsPage' },
       { title: 'Products', component: 'WooListPage' },
-      { title: 'Contact', component: 'ContactPage' }
+      { title: 'Orders', component: 'OrderPage' },
+      { title: 'Contact', component: 'ContactPage' },
+      
     ];
 
   }

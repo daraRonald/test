@@ -1,5 +1,13 @@
 page-woo-list {
 	.woocommerce.post-list {
+		
+		ion-card {
+			background: linear-gradient(45deg, #b8c2d8, #667aa3);
+			padding: 10px;
+			border-radius: 5px;
+			
+		}
+
 		.item h2 {
 			font-size: 1.8rem;
 			font-weight: bold;
@@ -13,10 +21,10 @@ page-woo-list {
 			margin-bottom: 5px;
 			color: Green;
 		}
-
-		.product-description, .product-rating {
-			font-size: 1.2rem;
+		.product-rating {
+			font-size: 1.3rem;
 			margin-bottom: 5px;
+			color: #000;
 		}
 	} 
 }

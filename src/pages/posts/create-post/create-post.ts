@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { WordpressProvider} from '../../providers/wordpress/wordpress';
+import { WordpressProvider} from '../../../providers/wordpress/wordpress';
 
 /**
  * Generated class for the CreateQuotePage page.
@@ -11,28 +11,25 @@ import { WordpressProvider} from '../../providers/wordpress/wordpress';
 
 @IonicPage()
 @Component({
-  selector: 'page-create-product',
-  templateUrl: 'create-product.html',
+  selector: 'page-create-post',
+  templateUrl: 'create-post.html',
 })
-export class CreateProductPage {
+export class CreatePostPage {
   content;
-  name;
-  price;
-  sale_price;
-  image;
+  title;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private wordpressProvider: WordpressProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CreateProductPage');
+    console.log('ionViewDidLoad CreateQuotePage');
   }
 
-  onCreateProduct(){
-    this.wordpressProvider.createProduct(this.name, this.content,this.price,this.sale_price).subscribe(data => {
+  onAddPost(){
+    this.wordpressProvider.createPost(this.title, this.content).subscribe(data => {
       console.log(data);
-    alert('Product is created!');
-    this.navCtrl.setRoot('WooListPage');
+    alert('Post is created!');
+    this.navCtrl.setRoot('PostsPage');
     });
   }
 
