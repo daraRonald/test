@@ -47,7 +47,7 @@ export class HomePage {
   }
 
   postTapped(event, post) {
-		this.navCtrl.push(PostPage, {
+		this.navCtrl.push('PostPage', {
 		  item: post
 		});
   }
@@ -56,7 +56,7 @@ export class HomePage {
     let page = (Math.ceil(this.posts.length/10)) + 1;
     let loading = true;
 
-    this.wordpressService.getRecentPosts(this.categoryId, page)
+    this.wordpressProvider.getRecentPosts(this.categoryId, page)
     .subscribe(data => {
       for(let post of data){
         if(!loading){
@@ -71,15 +71,4 @@ export class HomePage {
     })
   }
 
-  logOut(){
-    this.authenticationService.logOut()
-    .then(
-      res => this.navCtrl.push(LoginPage),
-      err => console.log('Error in log out')
-    )
-  }
-
-  goToLogin(){
-    this.navCtrl.push(LoginPage);
-  }
 }
