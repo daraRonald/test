@@ -45,7 +45,8 @@ export class PostsPage {
 
     this.wordpressProvider.getPosts(page)
     .subscribe(data => {
-      for(let post of data){
+    let posts : any = data;
+      for(let post of posts){
         if(!loading){
           infiniteScroll.complete();
         }
