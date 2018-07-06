@@ -19,14 +19,11 @@ export class EditProductPage {
   id : any;
   
   pid :any;
-  productname :string;
- 
-  productdescription : string;
- 
+  product : any;
+  productname :string; 
+  productdescription : string; 
   productprice :any;
- 
-  productsprice : any;
-		  
+  productsprice : any;		  
   placeholder_picture = "assets/images/pimage.png";
   
   constructor(
