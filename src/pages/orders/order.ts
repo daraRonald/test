@@ -44,6 +44,13 @@ export class OrderPage {
 		}
 
 	  });
+	  
+	  this.push.createChannel({
+		 id: "testchannel1",
+		 description: "My first test channel",
+		 // The importance property goes from 1 = Lowest, 2 = Low, 3 = Normal, 4 = High and 5 = Highest.
+		 importance: 3
+		}).then(() => alert('Channel created'));
   }
 
   
