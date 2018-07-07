@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, NavParams } from 'ionic-angular';
 import { WordpressProvider} from '../../providers/wordpress/wordpress';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 @IonicPage()
 @Component({
@@ -12,7 +13,6 @@ export class OrderPage {
   orders: any;
   morePagesAvailable: boolean = true;
   loggedUser: boolean = false;
-
   categoryId: number;
   categoryTitle: string;
 
@@ -20,7 +20,8 @@ export class OrderPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
-    public wordpressProvider: WordpressProvider
+    public wordpressProvider: WordpressProvider,
+    public push: Push
   ) {}
 
   ionViewWillEnter() {
@@ -31,11 +32,22 @@ export class OrderPage {
       this.wordpressProvider.getOrders().subscribe(data => {
       console.log(data);
       this.orders = data;
-    });
+	  });
       loading.dismiss();
+      
+	  this.push.hasPermission().then((res: any) => {
 
+		if (res.isEnabled) {
+		  alert('We have permission to send push notifications');
+		} else {
+		  alert('We do not have permission to send push notifications');
+		}
+
+	  });
   }
 
+  
+  
   postTapped(event, order) {
 		this.navCtrl.push('OrderDetailPage', {order});
   }
