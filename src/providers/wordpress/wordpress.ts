@@ -167,6 +167,11 @@ export class WordpressProvider {
       description: product.productdescription,
       price: product.productprice,
       sale_price: product.productsprice,
+      images: {
+		0 : {
+			src: product.productimage
+		}
+      },
       status: 'publish'
     };
     console.log(product);

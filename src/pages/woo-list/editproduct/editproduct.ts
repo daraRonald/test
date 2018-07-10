@@ -83,7 +83,7 @@ export class EditProductPage {
 		for (var i = 0; i < results.length; i++) {
 			this.productimage = results[i];
 			this.base64.encodeFile(results[i]).then((base64File: string) => {
-			  this.regData.avatar = base64File;
+			  this.productimage = base64File;
 			}, (err) => {
 			  console.log(err);
 			});
