@@ -33,8 +33,9 @@ export class ImageProvider {
          this._CAMERA.getPicture(cameraOptions)
          .then((data) =>
          {
-            this.cameraImage 	= "data:image/jpeg;base64," + data;
-            resolve(this.cameraImage);
+            //this.cameraImage 	= "data:image/jpeg;base64," + data;
+            //resolve(this.cameraImage);
+            return data;
          });
 
 

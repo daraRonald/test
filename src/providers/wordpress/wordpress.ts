@@ -121,6 +121,7 @@ export class WordpressProvider {
   }
   
   createProduct(name, content, price, sale_price,image){
+  alert(image);
     let pimage = {
 	  0 : image
     };
