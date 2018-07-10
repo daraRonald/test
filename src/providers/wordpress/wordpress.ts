@@ -121,13 +121,15 @@ export class WordpressProvider {
   }
   
   createProduct(name, content, price, sale_price,image){
-  alert(image);
+    let pimage = {
+	  0 : image
+    };
     let data = {
       name: name,
       description: content,
       regular_price: price,
       sale_price: sale_price,
-      images : image,
+      images : pimage,
       status: 'publish'
     };
     console.log(data);
