@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, NavParams } from 'ionic-angular';
 import { WordpressProvider} from '../../providers/wordpress/wordpress';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
+//import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 @IonicPage()
 @Component({
@@ -21,7 +21,7 @@ export class OrderPage {
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public wordpressProvider: WordpressProvider,
-    public push: Push
+    
   ) {}
 
   ionViewWillEnter() {
@@ -35,22 +35,7 @@ export class OrderPage {
 	  });
       loading.dismiss();
       
-	  this.push.hasPermission().then((res: any) => {
-
-		if (res.isEnabled) {
-		  alert('We have permission to send push notifications');
-		} else {
-		  alert('We do not have permission to send push notifications');
-		}
-
-	  });
 	  
-	  this.push.createChannel({
-		 id: "testchannel1",
-		 description: "My first test channel",
-		 // The importance property goes from 1 = Lowest, 2 = Low, 3 = Normal, 4 = High and 5 = Highest.
-		 importance: 3
-		}).then(() => alert('Channel created'));
   }
 
   

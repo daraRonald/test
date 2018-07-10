@@ -34,6 +34,13 @@
 		  <ion-input type="text" formControlName="productsprice" [(ngModel)]="productsprice"></ion-input>
 		</ion-item>
 		
+		<ion-card>
+			<ion-label color="primary" id="product-image">Product Image :</ion-label>
+			  
+			  <input type="hidden" name="image" formControlName="productimage" [(ngModel)]="productimage">
+			  <img [src]="productimage ? productimage : placeholder_picture" (click)="getPhoto()">
+			
+		</ion-card>
     </ion-list>
     
     <br>

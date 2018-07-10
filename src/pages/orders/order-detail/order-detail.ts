@@ -46,4 +46,11 @@ export class OrderDetailPage {
 		this.navCtrl.setRoot('EditPostPage', {post});
   }
 
+  confirmOrder() {
+		this.wordpressProvider.comfirmOrder(this.order.id).subscribe(data => {
+		  console.log(data);
+		alert('Order is Now Confirmed');
+		this.navCtrl.setRoot('OrderPage');
+		});
+  }
 }

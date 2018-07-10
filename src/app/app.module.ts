@@ -3,7 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
-
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
@@ -37,7 +38,9 @@ import {HttpClientModule} from '@angular/common/http';
     AuthProvider,
     WordpressProvider,
     WooProvider,
-    Push
+    Push,
+    ImagePicker,
+	Base64
   ]
 })
 export class AppModule {}

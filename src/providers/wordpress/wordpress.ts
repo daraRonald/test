@@ -192,4 +192,22 @@ export class WordpressProvider {
   let url = this.api_url_order;
 	return this.http.get(url, {headers: headers} );
   }
+  
+  comfirmOrder(id) {
+  
+	let data = {
+      
+      status: 'completed'
+    };
+    console.log(id);
+	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+	  console.log(token);
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    let url = this.api_url_order;
+	  return this.http.put( url+'/'+id, data, {headers: headers} );
+  }
 }

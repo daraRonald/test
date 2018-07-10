@@ -30,7 +30,7 @@ export class LoginPage {
   }
 
   onLogin(){
-    console.log(this.username, this.password);
+    //console.log(this.username, this.password);
     this.authProvider.postLogin(this.username, this.password).subscribe(data => {
       console.log(data);
       localStorage.setItem('wpIonicToken', JSON.stringify(data));

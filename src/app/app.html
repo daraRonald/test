@@ -18,9 +18,10 @@
 		</button>
 		
 		<div padding>
-			<button ion-button block icon-left class="menu-login-button" (click)="openLoginModal()">
+			<button menuClose ion-button block icon-left class="menu-login-button" (click)="doLogout()">
 			<ion-icon name="log-in"></ion-icon>
-			<span *ngIf="login_data">Logout</span><span *ngIf="!login_data">Login</span></button>
+			<span>LOGOUT</span>
+			</button>
 		</div>
 		
     </ion-list>
