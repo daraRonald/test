@@ -120,12 +120,14 @@ export class WordpressProvider {
 	return this.http.delete(url, httpOptions);
   }
   
-  createProduct(name, content, price, sale_price){
+  createProduct(name, content, price, sale_price,image){
+  alert(image);
     let data = {
       name: name,
       description: content,
       regular_price: price,
       sale_price: sale_price,
+      images : image,
       status: 'publish'
     };
     console.log(data);

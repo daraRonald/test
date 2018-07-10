@@ -25,6 +25,13 @@
     <ion-item>
       <ion-input type="number" placeholder="sale_price" [(ngModel)]="sale_price"></ion-input>
     </ion-item>
+    <ion-card>
+		<ion-label color="primary" id="product-image">Product Image :</ion-label>
+		  <ion-avatar>
+		  
+		  <img [src]="image ? image : placeholder_picture" (click)="getPhoto()">
+		</ion-avatar>
+	</ion-card>
    
   </ion-list>
 
