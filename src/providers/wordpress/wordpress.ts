@@ -160,19 +160,16 @@ export class WordpressProvider {
   
   editProduct(product:any, id:number){
 	
-	alert(product.productimage);
 	let image = {
 		src : product.productimage
 	};
-	let productimage = {
-		0 : image
-	};
+	
     let data = {
       name: product.productname,
       description: product.productdescription,
       price: product.productprice,
       sale_price: product.productsprice,
-      images: productimage,
+      images: image,
       status: 'publish'
     };
     console.log(product);
