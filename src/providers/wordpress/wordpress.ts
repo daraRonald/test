@@ -159,7 +159,7 @@ export class WordpressProvider {
   }
   
   editProduct(product:any, id:number){
-	alert(product.productimage);
+	
 	let image = {
 		src : product.productimage
 	};

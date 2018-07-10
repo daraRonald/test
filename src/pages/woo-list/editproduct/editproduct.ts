@@ -82,6 +82,7 @@ export class EditProductPage {
 	  this.imagePicker.getPictures(options).then((results) => {
 		for (var i = 0; i < results.length; i++) {
 			this.productimage = results[i];
+			alert(JSON.stringify(this.productimage));
 			this.base64.encodeFile(results[i]).then((base64File: string) => {
 			  this.productimage = base64File;
 			}, (err) => {
