@@ -159,13 +159,14 @@ export class WordpressProvider {
   }
   
   editProduct(product:any, id:number){
-	
+	alert(product.productimage);
 	let image = {
 		src : product.productimage
 	};
 	let productimage = {
 		0 : image
 	};
+	 
     let data = {
       name: product.productname,
       description: product.productdescription,
@@ -174,7 +175,9 @@ export class WordpressProvider {
       images: productimage,
       status: 'publish'
     };
-    console.log(product);
+   
+
+    alert(JSON.stringify(data));
 
     let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
     console.log(token);
