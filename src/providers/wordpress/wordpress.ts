@@ -160,7 +160,7 @@ export class WordpressProvider {
   
   editProduct(product:any, id:number){
 	
-	console.log(product);
+	alert(product.productimage);
 	
     let data = {
       name: product.productname,
