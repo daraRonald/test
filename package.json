@@ -22,6 +22,7 @@
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
     "@ionic-native/base64": "^4.9.0",
+    "@ionic-native/camera": "^4.9.1",
     "@ionic-native/core": "4.8.0",
     "@ionic-native/image-picker": "^4.9.0",
     "@ionic-native/push": "^4.9.0",
@@ -32,6 +33,7 @@
     "browserify": "^16.2.2",
     "com-badrit-base64": "^0.2.0",
     "cordova-android": "7.0.0",
+    "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.19",
@@ -63,7 +65,8 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-telerik-imagepicker": {},
-      "com-badrit-base64": {}
+      "com-badrit-base64": {},
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "android"

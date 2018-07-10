@@ -8,10 +8,12 @@ import { Base64 } from '@ionic-native/base64';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
-
+import { ImageProvider } from '../providers/image/image';
+import { HttpModule } from '@angular/http';
 import { AuthProvider } from '../providers/auth/auth';
 import { WordpressProvider } from '../providers/wordpress/wordpress';
 import { WooProvider} from '../providers/woocommerce/woocommerce';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import {HttpClientModule} from '@angular/common/http';
 
@@ -22,6 +24,7 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     HttpClientModule
@@ -40,7 +43,9 @@ import {HttpClientModule} from '@angular/common/http';
     WooProvider,
     Push,
     ImagePicker,
-	Base64
+	Base64,
+	ImageProvider,
+	Camera
   ]
 })
 export class AppModule {}

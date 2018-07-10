@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { WordpressProvider} from '../../../providers/wordpress/wordpress';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
+import { ImageProvider } from '../../../providers/image/image';
 
 /**
  * Generated class for the CreateQuotePage page.
@@ -29,6 +30,7 @@ export class CreateProductPage {
 			  public navParams: NavParams, 
 			  private wordpressProvider: WordpressProvider,
 			  private imagePicker: ImagePicker,
+			  private _IMG: ImageProvider,
 			  private base64: Base64) {
   }
 
@@ -37,20 +39,11 @@ export class CreateProductPage {
   }
   
   getPhoto() {
-	  let options = {
-		maximumImagesCount: 1
-	  };
-	  this.imagePicker.getPictures(options).then((results) => {
-		for (var i = 0; i < results.length; i++) {
-			this.image = results[i];
-			alert(JSON.stringify(results));
-			this.base64.encodeFile(results[i]).then((base64File: string) => {
-			  this.image = base64File;
-			}, (err) => {
-			  console.log(err);
-			});
-		}
-	  }, (err) => { });
+	  this._IMG.selectImage()
+      .then((data) =>
+      {
+         this.image = data;
+      });
 	}
 
   onCreateProduct(){
