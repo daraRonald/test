@@ -163,13 +163,15 @@ export class WordpressProvider {
 	let image = {
 		src : product.productimage
 	};
-	
+	let productimage = {
+		0 : image
+	};
     let data = {
       name: product.productname,
       description: product.productdescription,
       price: product.productprice,
       sale_price: product.productsprice,
-      images: image,
+      images: productimage,
       status: 'publish'
     };
     console.log(product);
