@@ -39,7 +39,7 @@ export class CreateProductPage {
   }
   
   getPhoto() {
-	  this._IMG.takePicture()
+	  this._IMG.selectImage()
       .then((data) =>
       {
          this.image = data;

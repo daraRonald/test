@@ -33,7 +33,7 @@ export class ImageProvider {
          this._CAMERA.getPicture(cameraOptions)
          .then((data) =>
          {
-            this.cameraImage 	= "data:image/jpeg;base64," + data;
+            this.cameraImage 	= data;
             resolve(this.cameraImage);
          });
 
@@ -41,25 +41,4 @@ export class ImageProvider {
       });
    }
 
-   takePicture(): Promise<any>  {
-            let options = {
-                destinationType: this._CAMERA.DestinationType.FILE_URI,
-                sourceType: 1,
-                encodingType: 0,
-                quality:50,
-                allowEdit: false,
-                saveToPhotoAlbum: false,            
-                correctOrientation: true,
-            };        
-            return this._CAMERA.getPicture(options).then((imgUrl) => {
-                return imgUrl;
-               
-            }, (err) => {                
-                if(err.error == "cordova_not_available") {
-                    alert("Cordova is not available, please make sure you have your app deployed on a simulator or device");            
-                } else {
-                    console.log("Failed to open camera: " + err.error);                
-                }    
-            });
-        } 
 }
