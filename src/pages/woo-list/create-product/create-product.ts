@@ -39,10 +39,11 @@ export class CreateProductPage {
   }
   
   getPhoto() {
-	  this._IMG.selectImage()
+	  this._IMG.takePicture()
       .then((data) =>
       {
          this.image = data;
+         alert(this.image);
       });
 	}
 
