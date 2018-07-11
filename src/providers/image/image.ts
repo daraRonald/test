@@ -29,7 +29,7 @@ export class ImageProvider {
    }
 
 
-   selectImage() : Promise<any>
+   selectImage() : any
    {
       
          let cameraOptions : CameraOptions = {
@@ -52,7 +52,7 @@ export class ImageProvider {
             this.filePath.resolveNativePath(data)
 			.then(filePath => {
 			  let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-			  let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+			  let currentName = data.substring(data.lastIndexOf('/') + 1, data.lastIndexOf('?'));
 			  this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
 			});
          });
