@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
-import { Transfer } from '@ionic-native/transfer';
+import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import {environment} from '../../envrionment';
 
