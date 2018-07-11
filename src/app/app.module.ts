@@ -14,7 +14,9 @@ import { AuthProvider } from '../providers/auth/auth';
 import { WordpressProvider } from '../providers/wordpress/wordpress';
 import { WooProvider} from '../providers/woocommerce/woocommerce';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -45,7 +47,10 @@ import {HttpClientModule} from '@angular/common/http';
     ImagePicker,
 	Base64,
 	ImageProvider,
-	Camera
+	File,
+    Transfer,
+    Camera,
+    FilePath,
   ]
 })
 export class AppModule {}
