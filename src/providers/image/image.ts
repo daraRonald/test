@@ -53,7 +53,7 @@ export class ImageProvider {
             };        
             return this._CAMERA.getPicture(options).then((imgUrl) => {
                 return imgUrl;
-                alert(imgUrl);
+               
             }, (err) => {                
                 if(err.error == "cordova_not_available") {
                     alert("Cordova is not available, please make sure you have your app deployed on a simulator or device");            
