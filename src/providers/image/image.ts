@@ -49,17 +49,31 @@ export class ImageProvider {
          {
             this.cameraImage = "data:image/png;base64," + data;
             resolve(this.cameraImage);
-            
-            //this.filePath.resolveNativePath(data)
-			//.then(filePath => {
-			 // let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-			  //let currentName = data.substring(data.lastIndexOf('/') + 1, data.lastIndexOf('?'));
-			  //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-			//});
          });
 
 		});
+	  this.uploadImage(this.cameraImage);
       
+   }
+   
+   uploadImage(image) {
+		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+		console.log(token);
+
+		let headers = new HttpHeaders({
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${token}`
+		});
+		
+		const fileTransfer: TransferObject = this.transfer.create();
+		fileTransfer.upload( image, this.api_url+'media', headers).then(data => {
+		
+		this.loading.dismissAll()
+		this.presentToast('Image succesful uploaded.');
+	  }, err => {
+		this.loading.dismissAll()
+		this.presentToast('Error while uploading file.');
+	  });
    }
    
   createFileName() {
