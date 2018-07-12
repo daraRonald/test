@@ -112,13 +112,13 @@ export class CreateProductPage {
   uploadImages() {
 		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		alert(token);
-		
+		var filename = this.pimage;
 		var options = {
 			fileKey: "file",
-			fileName: this.pimage,
+			fileName: filename,
 			chunkedMode: false,
 			mimeType: "multipart/form-data",
-			params : {'fileName': this.pimage}
+			params : {'fileName': filename}
 		  };
 		let headers = new HttpHeaders({
 		  'Content-Type': 'application/json',
