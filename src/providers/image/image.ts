@@ -69,11 +69,11 @@ export class ImageProvider {
 		const fileTransfer: TransferObject = this.transfer.create();
 		fileTransfer.upload( image, this.api_url+'media', { headers : headers }).then(data => {
 		
-		this.loading.dismissAll()
-		alert('Image succesful uploaded.');
+		
+		alert(JSON.stringify(data));
 	  }, err => {
-		this.loading.dismissAll()
-		alert('Error while uploading file.');
+		
+		alert(JSON.stringify(err));
 	  });
    }
    
