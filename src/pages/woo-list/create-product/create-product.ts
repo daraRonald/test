@@ -126,6 +126,7 @@ export class CreateProductPage {
 	  }).catch((err) => {
 		alert(JSON.stringify(err));
 	  });
+	  alert('upload is not work');
    }
   
   onCreateProduct(){
