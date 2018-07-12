@@ -114,8 +114,8 @@ export class CreateProductPage {
 		alert(token);
 		
 		let headers = new HttpHeaders({
-		  'Content-Type': 'application/json',
-		  'Authorization': `Bearer ${token}`
+		  "content-disposition" : "attachment; filename : \'mobiletwork1.png\'",
+		  "Authorization" : `Bearer ${token}`
 		});
     
 		const fileTransfer: TransferObject = this.transfer.create();
