@@ -110,7 +110,7 @@ export class CreateProductPage {
    
   uploadImages() {
 		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
-		console.log(token);
+		alert(token);
 
 		let headers = new HttpHeaders({
 		  'Content-Type': 'application/json',
@@ -118,6 +118,7 @@ export class CreateProductPage {
 		});
 		
 		const fileTransfer: TransferObject = this.transfer.create();
+		
 		fileTransfer.upload( this.image, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', { headers : headers }).then(data => {
 		
 		
