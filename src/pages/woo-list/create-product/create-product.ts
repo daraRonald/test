@@ -50,6 +50,7 @@ export class CreateProductPage {
 				  .then((data) =>
 				  {
 					 this.image = data;
+					 alert(this.image);
 				  });
 			  }
 			},

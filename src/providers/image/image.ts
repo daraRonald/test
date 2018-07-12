@@ -31,7 +31,7 @@ export class ImageProvider {
 
    selectImage() : any
    {
-      
+      return new Promise(resolve => {
          let cameraOptions : CameraOptions = {
              sourceType         : this._CAMERA.PictureSourceType.PHOTOLIBRARY,
              destinationType    : this._CAMERA.DestinationType.DATA_URL,
@@ -43,21 +43,21 @@ export class ImageProvider {
              correctOrientation : true
          };
 
-         return this._CAMERA.getPicture(cameraOptions)
+         this._CAMERA.getPicture(cameraOptions)
          .then((data) =>
          {
-            //this.cameraImage 	= "data:image/jpeg;base64," + data;
-            //resolve(this.cameraImage);
+            this.cameraImage = "data:image/jpeg;base64," + data;
+            return this.cameraImage;
             
-            this.filePath.resolveNativePath(data)
-			.then(filePath => {
-			  let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-			  let currentName = data.substring(data.lastIndexOf('/') + 1, data.lastIndexOf('?'));
-			  this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-			});
+            //this.filePath.resolveNativePath(data)
+			//.then(filePath => {
+			 // let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+			  //let currentName = data.substring(data.lastIndexOf('/') + 1, data.lastIndexOf('?'));
+			  //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+			//});
          });
 
-
+		}
       
    }
    
