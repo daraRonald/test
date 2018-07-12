@@ -29,7 +29,7 @@
 		<ion-label color="primary" id="product-image">Product Image : {{imageURI}}</ion-label>
 		  <ion-avatar>
 		  
-		  <img [src]="pimage ? pimage : placeholder_picture" (click)="getPhoto()">
+		  <img [src]="imageURI ? imageURI : placeholder_picture" (click)="getPhoto()">
 		</ion-avatar>
 		<button ion-button block (click)="uploadFile()">Upload Image to Media</button>
 	</ion-card>
