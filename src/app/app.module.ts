@@ -14,8 +14,9 @@ import { AuthProvider } from '../providers/auth/auth';
 import { WordpressProvider } from '../providers/wordpress/wordpress';
 import { WooProvider} from '../providers/woocommerce/woocommerce';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -42,11 +43,14 @@ import {HttpClientModule} from '@angular/common/http';
     AuthProvider,
     WordpressProvider,
     WooProvider,
-    Push, 
+    Push,
+    ImagePicker,
+	Base64,
 	ImageProvider,
-    Camera,
-    FileTransfer,
 	File,
+    Transfer,
+    Camera,
+    FilePath,
   ]
 })
 export class AppModule {}
