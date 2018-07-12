@@ -57,18 +57,18 @@ export class CreateProductPage {
 			{
 			  text: 'Upload File',
 			  handler: () => {
-				this._IMG.uploadImage();
+				//this._IMG.uploadImage();
 			  }
 			 },
 			 {
 			  text: 'Take Picture',
 			  handler: () => {
-				this._IMG.takePicture()
-				  .then((data) =>
-				  {
-					 this.image = data;
-					 alert(this.image);
-				  });
+				//this._IMG.takePicture()
+				  //.then((data) =>
+				 // {
+					 //this.image = data;
+					// alert(this.image);
+				 // });
 			  }
 			 },
 			 {
