@@ -139,6 +139,20 @@ export class CreateProductPage {
 	  });
 	}
    
+   presentToast(msg) {
+		let toast = this.toastCtrl.create({
+		  message: msg,
+		  duration: 6000,
+		  position: 'bottom'
+		});
+
+		toast.onDidDismiss(() => {
+		  console.log('Dismissed toast');
+		});
+
+		toast.present();
+	}
+   
   uploadImages() {
 		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		alert(token);
