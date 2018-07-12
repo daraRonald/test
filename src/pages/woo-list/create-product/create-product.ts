@@ -6,7 +6,7 @@ import { Base64 } from '@ionic-native/base64';
 import { ImageProvider } from '../../../providers/image/image';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { FileTransfer, FileTransferObject, FileUploadOptions } from '@ionic-native/transfer';
 
 /**
  * Generated class for the CreateQuotePage page.
@@ -37,7 +37,7 @@ export class CreateProductPage {
 			  private imagePicker: ImagePicker,
 			  private _IMG: ImageProvider,
 			  public loadingCtrl: LoadingController,
-			  private transfer: Transfer, 
+			  private transfer: FileTransfer, 
 			  private _CAMERA : Camera) {}
 
   ionViewDidLoad() {
@@ -113,20 +113,34 @@ export class CreateProductPage {
 		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		alert(token);
 		
-		const fileTransfer = this.transfer.create();
-		alert('Transfer File exit');
-		alert(this.pimage);
-		fileTransfer.upload( this.pimage, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media',{ headers : 
-			{
-			  "content-disposition" : "attachment; filename=\'mobiletwork1.png\'",
-			  "Authorization" : `Bearer ${token}`
-			}
-		}).then((data) => {
-		alert(JSON.stringify(data));
-	  }).catch((err) => {
-		alert(JSON.stringify(err));
-	  });
-	  alert('upload is not work');
+		let headers = new HttpHeaders({
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${token}`
+		});
+		
+		const fileTransfer: FileTransferObject = this.transfer.create();
+
+		let options: FileUploadOptions = {
+		  fileKey: 'ionicfile',
+		  fileName: 'ionicfile',
+		  chunkedMode: false,
+		  mimeType: "image/png",
+		  headers: headers
+		}
+
+    fileTransfer.upload(this.pimage, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', options)
+		  .then((data) => {
+		  alert(data+" Uploaded Successfully");
+		  //this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
+		  //loader.dismiss();
+		  alert("Image uploaded successfully");
+		}, (err) => {
+		  //console.log(err);
+		  //loader.dismiss();
+		  alert(err);
+	});
+
+		
    }
   
   onCreateProduct(){
