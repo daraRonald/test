@@ -92,7 +92,7 @@ export class CreateProductPage {
              quality            : 100,
              targetWidth        : 320,
              targetHeight       : 240,
-             encodingType       : this._CAMERA.EncodingType.JPEG,
+             encodingType       : this._CAMERA.EncodingType.PNG,
              mediaType          : this._CAMERA.MediaType.PICTURE,
              correctOrientation : true
          };
@@ -113,13 +113,13 @@ export class CreateProductPage {
 		alert(token);
 
 		let headers = new HttpHeaders({
-		  'Content-Type': 'application/json',
+		  'content-disposition': 'attachment; filename=\'twork1.png\'',
 		  'Authorization': `Bearer ${token}`
 		});
 		
 		const fileTransfer: TransferObject = this.transfer.create();
 		
-		fileTransfer.upload( this.image, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', { headers : headers }).then(data => {
+		fileTransfer.upload( this.image, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', headers).then(data => {
 		
 		
 		alert(JSON.stringify(data));
