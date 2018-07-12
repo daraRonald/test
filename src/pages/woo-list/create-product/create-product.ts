@@ -96,6 +96,20 @@ export class CreateProductPage {
 		this.presentToast(err);
 	  });
 	}
+	
+  presentToast(msg) {
+	  let toast = this.toastCtrl.create({
+		message: msg,
+		duration: 3000,
+		position: 'bottom'
+	  });
+
+	  toast.onDidDismiss(() => {
+		console.log('Dismissed toast');
+	  });
+
+	  toast.present();
+	}
 
   getPhoto() {
 	  const actionSheet = this.actionSheetCtrl.create({
