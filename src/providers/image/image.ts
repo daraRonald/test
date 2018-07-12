@@ -43,7 +43,7 @@ export class ImageProvider {
              correctOrientation : true
          };
 
-         this._CAMERA.getPicture(cameraOptions)
+         return this._CAMERA.getPicture(cameraOptions)
          .then((data) =>
          {
             //this.cameraImage 	= "data:image/jpeg;base64," + data;
