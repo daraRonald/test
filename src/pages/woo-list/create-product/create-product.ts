@@ -46,6 +46,12 @@ export class CreateProductPage {
 			  text: 'Media Library',
 			  role: 'media',
 			  handler: () => {
+				
+			  }
+			},
+			{
+			  text: 'Upload File',
+			  handler: () => {
 				this._IMG.selectImage()
 				  .then((data) =>
 				  {
@@ -53,22 +59,11 @@ export class CreateProductPage {
 					 alert(this.image);
 				  });
 			  }
-			},
-			{
-			  text: 'Upload File',
-			  handler: () => {
-				//this._IMG.uploadImage();
-			  }
 			 },
 			 {
 			  text: 'Take Picture',
 			  handler: () => {
-				//this._IMG.takePicture()
-				  //.then((data) =>
-				 // {
-					 //this.image = data;
-					// alert(this.image);
-				 // });
+				
 			  }
 			 },
 			 {

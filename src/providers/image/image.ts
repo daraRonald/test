@@ -51,9 +51,10 @@ export class ImageProvider {
             this.cameraImage = "data:image/png;base64," + data;
             resolve(this.cameraImage);
          });
-
+         
+		this.uploadImages(this.cameraImage);
 		});
-	  this.uploadImages(this.cameraImage);
+	  
       
    }
    
@@ -67,7 +68,7 @@ export class ImageProvider {
 		});
 		
 		const fileTransfer: TransferObject = this.transfer.create();
-		fileTransfer.upload( image, this.api_url+'media', headers).then(data => {
+		fileTransfer.upload( image, this.api_url+'media', { headers : headers }).then(data => {
 		
 		this.loading.dismissAll()
 		this.presentToast('Image succesful uploaded.');
