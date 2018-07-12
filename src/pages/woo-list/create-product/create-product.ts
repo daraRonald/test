@@ -55,8 +55,8 @@ export class CreateProductPage {
 				this._IMG.selectImage()
 				  .then((data) =>
 				  {
-					 this.image = data;
-					 alert(this.image);
+					 //this.image = data;
+					 alert(data);
 				  });
 			  }
 			},
