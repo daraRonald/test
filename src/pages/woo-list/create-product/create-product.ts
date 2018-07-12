@@ -25,8 +25,8 @@ export class CreateProductPage {
   name;
   price;
   sale_price;
+  image;
   pimage;
-  
   placeholder_picture = "assets/images/pimage.png";
 
 
@@ -55,8 +55,8 @@ export class CreateProductPage {
 				this._IMG.selectImage()
 				  .then((data) =>
 				  {
-					 //this.image = data;
-					 //alert(this.image);
+					 this.image = data;
+					 alert(this.image);
 				  });
 			  }
 			},
@@ -90,9 +90,9 @@ export class CreateProductPage {
          let cameraOptions : CameraOptions = {
              sourceType         : this._CAMERA.PictureSourceType.PHOTOLIBRARY,
              destinationType    : this._CAMERA.DestinationType.DATA_URL,
-             quality            : 50,
-             targetWidth        : 512,
-             targetHeight       : 512,
+             quality            : 100,
+             targetWidth        : 320,
+             targetHeight       : 240,
              encodingType       : this._CAMERA.EncodingType.PNG,
              mediaType          : this._CAMERA.MediaType.PICTURE,
              correctOrientation : true
@@ -101,12 +101,35 @@ export class CreateProductPage {
          this._CAMERA.getPicture(cameraOptions)
          .then((data) =>
          {
-            this.pimage = data;
-         }); 
+            this.pimage = "data:image/png;base64," + data;
+         });
+         
+		
+	  
       
    }
    
-  
+  uploadImages() {
+		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+		alert(token);
+
+		let headers = new HttpHeaders({
+		  'Content-Type': 'application/json',
+		  'content-disposition': "attachment; filename=\'twork1.png\'",
+		  'Authorization': `Bearer ${token}`
+		});
+		
+		const fileTransfer: TransferObject = this.transfer.create();
+		
+		fileTransfer.upload( this.pimage, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', { headers : headers }).then(data => {
+		
+		
+		alert(JSON.stringify(data));
+	  }, err => {
+		
+		alert(JSON.stringify(err));
+	  });
+   }
   
   onCreateProduct(){
     this.wordpressProvider.createProduct(this.name, this.content,this.price,this.sale_price,this.pimage).subscribe(data => {
