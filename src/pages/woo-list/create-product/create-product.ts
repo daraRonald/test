@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ActionSheetController, LoadingController } from 'ionic-angular';
 import { WordpressProvider} from '../../../providers/wordpress/wordpress';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import { ImageProvider } from '../../../providers/image/image';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Transfer, TransferObject } from '@ionic-native/transfer';
 
 /**
  * Generated class for the CreateQuotePage page.
@@ -33,7 +35,8 @@ export class CreateProductPage {
 			  public actionSheetCtrl: ActionSheetController,
 			  private imagePicker: ImagePicker,
 			  private _IMG: ImageProvider,
-			  private base64: Base64,
+			  public loadingCtrl: LoadingController,
+			  private transfer: Transfer, 
 			  private _CAMERA : Camera) {}
 
   ionViewDidLoad() {
@@ -105,34 +108,25 @@ export class CreateProductPage {
       
    }
    
-  uploadFile() {
-  
-	  let loader = this.loadingCtrl.create({
-		content: "Uploading..."
-	  });
-	  loader.present();
-	  const fileTransfer: FileTransferObject = this.transfer.create();
+  uploadImages() {
+		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+		console.log(token);
 
-	  let options: FileUploadOptions = {
-		fileKey: 'ionicfile',
-		fileName: 'ionicfile',
-		chunkedMode: false,
-		mimeType: "image/jpeg",
-		headers: {}
-	  }
-
-	  fileTransfer.upload(this.imageURI, 'http://192.168.0.7:8080/api/uploadImage', options)
-		.then((data) => {
-		console.log(data+" Uploaded Successfully");
-		this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
-		loader.dismiss();
-		this.presentToast("Image uploaded successfully");
-	  }, (err) => {
-		console.log(err);
-		loader.dismiss();
-		this.presentToast(err);
+		let headers = new HttpHeaders({
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${token}`
+		});
+		
+		const fileTransfer: TransferObject = this.transfer.create();
+		fileTransfer.upload( this.image, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', { headers : headers }).then(data => {
+		
+		
+		alert(JSON.stringify(data));
+	  }, err => {
+		
+		alert(JSON.stringify(err));
 	  });
-	}
+   }
   
   onCreateProduct(){
     this.wordpressProvider.createProduct(this.name, this.content,this.price,this.sale_price,this.image).subscribe(data => {
