@@ -46,7 +46,7 @@ export class CreateProductPage {
 			  text: 'Media Library',
 			  role: 'media',
 			  handler: () => {
-				
+				alert('Media clicked');
 			  }
 			},
 			{
@@ -58,20 +58,20 @@ export class CreateProductPage {
 					 this.image = data;
 					 alert(this.image);
 				  });
-				this._IMG.uploadImages(this.image);
+				
 			  }
 			 },
 			 {
 			  text: 'Take Picture',
 			  handler: () => {
-				
+				alert('Take Pic clicked');
 			  }
 			 },
 			 {
 			  text: 'Cancel',
 			  role: 'cancel',
 			  handler: () => {
-				console.log('Cancel clicked');
+				alert('Cancel clicked');
 			  }
 			}
 		  ]
@@ -80,6 +80,14 @@ export class CreateProductPage {
 	  
   }
 
+  upload() {
+	this._IMG.uploadImages(this.image) .then((data) =>
+	  {
+		
+		 alert(data);
+	  });
+  }
+  
   onCreateProduct(){
     this.wordpressProvider.createProduct(this.name, this.content,this.price,this.sale_price,this.image).subscribe(data => {
       console.log(data);
