@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ActionSheetController, LoadingController, ToastController  } from 'ionic-angular';
 import { WordpressProvider} from '../../../providers/wordpress/wordpress';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
@@ -7,6 +7,7 @@ import { ImageProvider } from '../../../providers/image/image';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 /**
  * Generated class for the CreateQuotePage page.
@@ -27,6 +28,10 @@ export class CreateProductPage {
   sale_price;
   image;
   pimage;
+  
+  imageURI:any;
+  imageFileName:any;
+
   placeholder_picture = "assets/images/pimage.png";
 
 
@@ -44,6 +49,54 @@ export class CreateProductPage {
     console.log('ionViewDidLoad CreateProductPage');
   }
   
+  getImage() {
+	  const options: CameraOptions = {
+		quality: 100,
+		destinationType: this._CAMERA.DestinationType.FILE_URI,
+		sourceType: this._CAMERA.PictureSourceType.PHOTOLIBRARY
+	  }
+
+	  this._CAMERA.getPicture(options).then((imageData) => {
+		this.imageURI = imageData;
+	  }, (err) => {
+		console.log(err);
+		this.presentToast(err);
+	  });
+	}
+
+  uploadFile() {
+	  let loader = this.loadingCtrl.create({
+		content: "Uploading..."
+	  });
+	  loader.present();
+	  
+	  let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+		alert(token);
+		
+	  const fileTransfer: FileTransferObject = this.transfer.create();
+
+	  let options: FileUploadOptions = {
+		fileKey: 'ionicfile',
+		fileName: 'ionicfile',
+		chunkedMode: false,
+		mimeType: "image/jpeg",
+		headers: {'Content-Type': 'application/json',
+				  'Authorization': `Bearer ${token}`}
+	  }
+
+	  fileTransfer.upload(this.imageURI, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', options)
+		.then((data) => {
+		console.log(data+" Uploaded Successfully");
+		this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
+		loader.dismiss();
+		this.presentToast("Image uploaded successfully");
+	  }, (err) => {
+		console.log(err);
+		loader.dismiss();
+		this.presentToast(err);
+	  });
+	}
+
   getPhoto() {
 	  const actionSheet = this.actionSheetCtrl.create({
 		  title: 'Upload Your Photo...',
