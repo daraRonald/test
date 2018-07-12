@@ -81,11 +81,7 @@ export class CreateProductPage {
   }
 
   upload() {
-	this._IMG.uploadImages(this.image).then((data) =>
-	  {
-		
-		 alert(data);
-	  });
+	this._IMG.uploadImages(this.image);
   }
   
   onCreateProduct(){
