@@ -113,7 +113,7 @@ export class CreateProductPage {
 		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		alert(token);
 		
-		const fileTransfer: TransferObject = this.transfer.create();
+		const fileTransfer = this.transfer.create();
 		alert('Transfer File exit');
 		alert(this.pimage);
 		fileTransfer.upload( this.pimage, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media',{ headers : 
