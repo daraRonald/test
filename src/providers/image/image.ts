@@ -17,7 +17,7 @@ export class ImageProvider {
    lastImage: string = null;
    loading: Loading;
    api_url = environment.site_url+environment.data_url;
-   cameraImage: string;
+   cameraImage: string = null;
    
    constructor(public http     : Http,
                private _CAMERA : Camera,
@@ -71,10 +71,10 @@ export class ImageProvider {
 		fileTransfer.upload( image, this.api_url+'media', { headers : headers }).then(data => {
 		
 		this.loading.dismissAll()
-		this.presentToast('Image succesful uploaded.');
+		alert('Image succesful uploaded.');
 	  }, err => {
 		this.loading.dismissAll()
-		this.presentToast('Error while uploading file.');
+		alert('Error while uploading file.');
 	  });
    }
    
