@@ -37,6 +37,7 @@ export class CreateProductPage {
 			  private imagePicker: ImagePicker,
 			  private _IMG: ImageProvider,
 			  public loadingCtrl: LoadingController,
+			  public toastCtrl: ToastController,
 			  private transfer: Transfer, 
 			  private ftransfer: FileTransfer, 
 			  private _CAMERA : Camera) {}
