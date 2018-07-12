@@ -101,7 +101,7 @@ export class CreateProductPage {
          this._CAMERA.getPicture(cameraOptions)
          .then((data) =>
          {
-            this.pimage = "data:image/png;base64," + data;
+            this.pimage = data;
          }); 
       
    }
