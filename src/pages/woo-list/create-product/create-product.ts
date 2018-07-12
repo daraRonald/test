@@ -139,24 +139,42 @@ export class CreateProductPage {
 	  });
 	}
    
-   presentToast(msg) {
-		let toast = this.toastCtrl.create({
-		  message: msg,
-		  duration: 6000,
-		  position: 'bottom'
+  uploadImages() {
+		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+		alert(token);
+		
+		let headers = new HttpHeaders({
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${token}`
 		});
+		
+		const fileTransfer: FileTransferObject = this.transfer.create();
 
-		toast.onDidDismiss(() => {
-		  console.log('Dismissed toast');
-		});
+		let options: FileUploadOptions = {
+		  fileKey: 'ionicfile',
+		  fileName: 'ionicfile',
+		  chunkedMode: false,
+		  mimeType: "image/png",
+		  headers: headers
+		}
 
-		toast.present();
-	}
-   
-  
+    fileTransfer.upload(this.pimage, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', options)
+		  .then((data) => {
+		  alert(data+" Uploaded Successfully");
+		  //this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
+		  //loader.dismiss();
+		  alert("Image uploaded successfully");
+		}, (err) => {
+		  //console.log(err);
+		  //loader.dismiss();
+		  alert(err);
+	});
+
+		
+   }
   
   onCreateProduct(){
-    this.wordpressProvider.createProduct(this.name, this.content,this.price,this.sale_price,this.imageURI).subscribe(data => {
+    this.wordpressProvider.createProduct(this.name, this.content,this.price,this.sale_price,this.pimage).subscribe(data => {
       console.log(data);
       alert('Product is created!');
       this.navCtrl.setRoot('WooListPage');
