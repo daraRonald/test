@@ -1,19 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, , LoadingController, ToastController } from 'ionic-angular';
 import { WordpressProvider} from '../../../providers/wordpress/wordpress';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import { ImageProvider } from '../../../providers/image/image';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { FileTransfer, FileTransferObject, FileUploadOptions } from '@ionic-native/transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
-/**
- * Generated class for the CreateQuotePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -25,8 +19,8 @@ export class CreateProductPage {
   name;
   price;
   sale_price;
-  pimage;
-  
+  imageURI:any;
+  imageFileName:any;
   placeholder_picture = "assets/images/pimage.png";
 
 
@@ -36,8 +30,9 @@ export class CreateProductPage {
 			  public actionSheetCtrl: ActionSheetController,
 			  private imagePicker: ImagePicker,
 			  private _IMG: ImageProvider,
+			  private transfer: FileTransfer,
 			  public loadingCtrl: LoadingController,
-			  private transfer: FileTransfer, 
+			  public toastCtrl: ToastController,
 			  private _CAMERA : Camera) {}
 
   ionViewDidLoad() {
@@ -88,26 +83,61 @@ export class CreateProductPage {
   selectImage() {
       
          let cameraOptions : CameraOptions = {
+			
              sourceType         : this._CAMERA.PictureSourceType.PHOTOLIBRARY,
-             destinationType    : this._CAMERA.DestinationType.DATA_URL,
-             quality            : 50,
+             destinationType    : this._CAMERA.DestinationType.FILE_URI,
+             quality            : 100,
              targetWidth        : 512,
              targetHeight       : 512,
-             encodingType       : this._CAMERA.EncodingType.PNG,
-             mediaType          : this._CAMERA.MediaType.PICTURE,
-             correctOrientation : true
          };
 
          this._CAMERA.getPicture(cameraOptions)
          .then((data) =>
          {
-            this.pimage = "data:image/png;base64," + data;
-         });
-         
-		
-	  
+           this.imageURI = data;
+         },(err) => {
+			console.log(err);
+			this.presentToast(err);
+		  });	  
       
    }
+   
+   uploadFile() {
+	  let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+		alert(token);
+		
+		let headers = new HttpHeaders({
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${token}`
+		});
+	  
+	  let loader = this.loadingCtrl.create({
+		content: "Uploading..."
+	  });
+	  loader.present();
+	  const fileTransfer: FileTransferObject = this.transfer.create();
+
+	  let options: FileUploadOptions = {
+		fileKey: 'ionicfile',
+		fileName: 'ionicfile',
+		chunkedMode: false,
+		mimeType: "image/jpeg",
+		headers: {'Content-Type': 'application/json',
+				  'Authorization': `Bearer ${token}`}
+	  }
+
+	  fileTransfer.upload(this.imageURI, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', options)
+		.then((data) => {
+		console.log(data+" Uploaded Successfully");
+		this.imageFileName = "";
+		loader.dismiss();
+		this.presentToast("Image uploaded successfully");
+	  }, (err) => {
+		console.log(err);
+		loader.dismiss();
+		this.presentToast(err);
+	  });
+	}
    
   uploadImages() {
 		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;

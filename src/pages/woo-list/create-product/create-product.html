@@ -26,12 +26,12 @@
       <ion-input type="number" placeholder="sale_price" [(ngModel)]="sale_price"></ion-input>
     </ion-item>
     <ion-card>
-		<ion-label color="primary" id="product-image">Product Image :</ion-label>
+		<ion-label color="primary" id="product-image">Product Image : {{imageURI}}</ion-label>
 		  <ion-avatar>
 		  
 		  <img [src]="pimage ? pimage : placeholder_picture" (click)="getPhoto()">
 		</ion-avatar>
-		<button ion-button block (click)="uploadImages()">Upload Image to Media</button>
+		<button ion-button block (click)="uploadFile()">Upload Image to Media</button>
 	</ion-card>
    
   </ion-list>
