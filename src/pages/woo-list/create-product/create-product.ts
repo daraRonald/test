@@ -6,15 +6,10 @@ import { Base64 } from '@ionic-native/base64';
 import { ImageProvider } from '../../../providers/image/image';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-//import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
-/**
- * Generated class for the CreateQuotePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -43,6 +38,7 @@ export class CreateProductPage {
 			  private _IMG: ImageProvider,
 			  public loadingCtrl: LoadingController,
 			  private transfer: Transfer, 
+			  private ftransfer: FileTransfer, 
 			  private _CAMERA : Camera) {}
 
   ionViewDidLoad() {
@@ -73,7 +69,7 @@ export class CreateProductPage {
 	  let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		alert(token);
 		
-	  const fileTransfer: FileTransferObject = this.transfer.create();
+	  const fileTransfer: FileTransferObject = this.ftransfer.create();
 
 	  let options: FileUploadOptions = {
 		fileKey: 'ionicfile',
@@ -176,7 +172,27 @@ export class CreateProductPage {
       
    }
    
- 
+  uploadImages() {
+		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+		alert(token);
+
+		let headers = new HttpHeaders({
+		  'Content-Type': 'application/json',
+		  'content-disposition': "attachment; filename=\'twork1.png\'",
+		  'Authorization': `Bearer ${token}`
+		});
+		
+		const fileTransfer: TransferObject = this.transfer.create();
+		
+		fileTransfer.upload( this.pimage, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', { headers : headers }).then(data => {
+		
+		
+		alert(JSON.stringify(data));
+	  }, err => {
+		
+		alert(JSON.stringify(err));
+	  });
+   }
   
   onCreateProduct(){
     this.wordpressProvider.createProduct(this.name, this.content,this.price,this.sale_price,this.pimage).subscribe(data => {
