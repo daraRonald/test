@@ -120,6 +120,7 @@ export class CreateProductPage {
     
 		const fileTransfer: TransferObject = this.transfer.create();
 		alert('Transfer File exit');
+		alert(this.pimage);
 		fileTransfer.upload( this.pimage, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media',{ headers : headers }).then(data => {
 		alert(JSON.stringify(data));
 	  }, err => {
