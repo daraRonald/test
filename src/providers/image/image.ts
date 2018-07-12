@@ -7,6 +7,7 @@ import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import {environment} from '../../envrionment';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 declare var cordova: any;
 
@@ -52,11 +53,11 @@ export class ImageProvider {
          });
 
 		});
-	  this.uploadImage(this.cameraImage);
+	  this.uploadImages(this.cameraImage);
       
    }
    
-   uploadImage(image) {
+   uploadImages(image) {
 		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		console.log(token);
 
