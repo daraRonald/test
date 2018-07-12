@@ -154,6 +154,14 @@ export class CreateProductPage {
 	}
    
   
+  
+  onCreateProduct(){
+    this.wordpressProvider.createProduct(this.name, this.content,this.price,this.sale_price,this.imageURI).subscribe(data => {
+      console.log(data);
+      alert('Product is created!');
+      this.navCtrl.setRoot('WooListPage');
+    });
+  }
 
   
 }
