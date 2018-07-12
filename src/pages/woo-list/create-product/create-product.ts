@@ -112,17 +112,12 @@ export class CreateProductPage {
 		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		alert(token);
 
-		let headers = new HttpHeaders({
-		  'Content-Type': 'application/json',
-		  'content-disposition': "attachment; filename=\'twork1.png\'",
-		  'Authorization': `Bearer ${token}`
-		});
-		
 		const fileTransfer: TransferObject = this.transfer.create();
 		
-		fileTransfer.upload( this.image, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', { headers : headers }).then(data => {
-		
-		
+		fileTransfer.upload( this.image, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', { headers : {
+			"content-disposition": "attachment; filename=\'twork1.png\'",
+		    "Authorization": `Bearer ${token}`
+		} }).then(data => {
 		alert(JSON.stringify(data));
 	  }, err => {
 		
