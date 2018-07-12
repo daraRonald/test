@@ -112,14 +112,7 @@ export class CreateProductPage {
   uploadImages() {
 		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		alert(token);
-		var filename = this.pimage;
-		var options = {
-			fileKey: "file",
-			fileName: filename,
-			chunkedMode: false,
-			mimeType: "multipart/form-data",
-			params : {'fileName': filename}
-		  };
+		
 		let headers = new HttpHeaders({
 		  'Content-Type': 'application/json',
 		  'Authorization': `Bearer ${token}`
@@ -127,7 +120,7 @@ export class CreateProductPage {
     
 		const fileTransfer: TransferObject = this.transfer.create();
 		alert('Transfer File exit');
-		fileTransfer.upload( options, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media',{ headers : headers }).then(data => {
+		fileTransfer.upload( this.pimage, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media',{ headers : headers }).then(data => {
 		alert(JSON.stringify(data));
 	  }, err => {
 		
