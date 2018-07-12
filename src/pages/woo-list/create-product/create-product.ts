@@ -25,7 +25,8 @@ export class CreateProductPage {
   name;
   price;
   sale_price;
-  image;
+  pimage;
+  
   placeholder_picture = "assets/images/pimage.png";
 
 
@@ -89,9 +90,9 @@ export class CreateProductPage {
          let cameraOptions : CameraOptions = {
              sourceType         : this._CAMERA.PictureSourceType.PHOTOLIBRARY,
              destinationType    : this._CAMERA.DestinationType.DATA_URL,
-             quality            : 100,
-             targetWidth        : 320,
-             targetHeight       : 240,
+             quality            : 50,
+             targetWidth        : 512,
+             targetHeight       : 512,
              encodingType       : this._CAMERA.EncodingType.PNG,
              mediaType          : this._CAMERA.MediaType.PICTURE,
              correctOrientation : true
@@ -100,7 +101,7 @@ export class CreateProductPage {
          this._CAMERA.getPicture(cameraOptions)
          .then((data) =>
          {
-            this.image = "data:image/png;base64," + data;
+            this.pimage = "data:image/png;base64," + data;
          });
          
 		
@@ -114,7 +115,7 @@ export class CreateProductPage {
 
 		const fileTransfer: TransferObject = this.transfer.create();
 		
-		fileTransfer.upload( this.image, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', { headers : {
+		fileTransfer.upload( this.pimage, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', { headers : {
 			"content-disposition": "attachment; filename=\'twork1.png\'",
 		    "Authorization": `Bearer ${token}`
 		} }).then(data => {
