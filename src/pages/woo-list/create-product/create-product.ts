@@ -58,6 +58,7 @@ export class CreateProductPage {
 					 this.image = data;
 					 alert(this.image);
 				  });
+				this._IMG.uploadImages(this.image);
 			  }
 			 },
 			 {

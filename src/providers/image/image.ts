@@ -52,7 +52,6 @@ export class ImageProvider {
             resolve(this.cameraImage);
          });
          
-		this.uploadImages(this.cameraImage);
 		});
 	  
       
