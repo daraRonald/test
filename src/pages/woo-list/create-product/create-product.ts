@@ -114,7 +114,7 @@ export class CreateProductPage {
 		alert(token);
 		
 		let headers = new HttpHeaders({
-		  "content-disposition" : "attachment; filename : \'mobiletwork1.png\'",
+		  "content-disposition" : "attachment; filename=\'mobiletwork1.png\'",
 		  "Authorization" : `Bearer ${token}`
 		});
     
