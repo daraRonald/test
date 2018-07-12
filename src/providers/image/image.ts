@@ -16,6 +16,7 @@ export class ImageProvider {
    lastImage: string = null;
    loading: Loading;
    api_url = environment.site_url+environment.data_url;
+   cameraImage: string;
    
    constructor(public http     : Http,
                private _CAMERA : Camera,
@@ -29,7 +30,7 @@ export class ImageProvider {
    }
 
 
-   selectImage() : any
+   selectImage() 
    {
       return new Promise(resolve => {
          let cameraOptions : CameraOptions = {
@@ -46,8 +47,8 @@ export class ImageProvider {
          this._CAMERA.getPicture(cameraOptions)
          .then((data) =>
          {
-            this.cameraImage = "data:image/jpeg;base64," + data;
-            return this.cameraImage;
+            this.cameraImage = "data:image/png;base64," + data;
+            resolve(this.cameraImage);
             
             //this.filePath.resolveNativePath(data)
 			//.then(filePath => {
@@ -57,7 +58,7 @@ export class ImageProvider {
 			//});
          });
 
-		}
+		});
       
    }
    
