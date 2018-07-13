@@ -15,6 +15,8 @@ export class ImagePage {
   hiddenImage= true;
   constructor(public navCtrl: NavController, 
 			  public navParams: NavParams,
+			  public loadingCtrl: LoadingController,
+			  public toastCtrl: ToastController,
 			  private transfer: Transfer,
 			  private _CAMERA : Camera) {
   }
@@ -25,36 +27,63 @@ export class ImagePage {
   
   getImage() {
 	  const options: CameraOptions = {
-		quality			   : 50,
+		quality			   : 100,
 		destinationType	   : this._CAMERA.DestinationType.DATA_URL,
 		sourceType		   : this._CAMERA.PictureSourceType.PHOTOLIBRARY,
 		allowEdit		   : false,
 		targetWidth        : 512,
         targetHeight       : 512,
-        encodingType       : this._CAMERA.EncodingType.PNG,
+        encodingType       : this._CAMERA.EncodingType.JPEG,
+        mediaType          : this._CAMERA.MediaType.PICTURE,
 		correctOrientation : true
 	  }
 
 	  this._CAMERA.getPicture(options).then((imageData) => {
 		this.imageData = imageData;
-		this.imageUrl = "data:image/png;base64," + imageData;
+		this.imageUrl = "data:image/jpeg;base64," + imageData;
 		this.hiddenImage = false;
+	  }, (err) => {
+		console.log(err);
+		this.presentToast(err);
 	  });
   }
   
   uploadFile() {
+    let loader = this.loadingCtrl.create({
+		content: "Uploading..."
+	  });
+	  loader.present();
+	  
 	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		
 	let trans = this.transfer.create();
+	  
 	trans.upload(this.imageUrl , "https://mobileapp.tworksystem.org/wp-json/wp/v2/media", {
-		headers : {
-			"Authorization": `Bearer ${token}`,
-			"content-disposition": "attachment; filename=\'tworksystem1.png\'",
-		}
+		headers: {"Authorization": `Bearer ${token}`,
+				  "content-disposition": "attachment; filename=\'tworksystem1.jpeg\';"
+				 }
 	}).then((res)=> {
 		alert(JSON.stringify(res));
+		loader.dismiss();
+		this.presentToast("Image uploaded successfully");
 	}).catch((err)=> {
-		alert(JSON.stringify(err));
+		loader.dismiss();
+		this.presentToast(err);
 	});
+  }
+  
+  presentToast(msg) {
+	  
+	  let toast = this.toastCtrl.create({
+		message: msg,
+		duration: 3000,
+		position: 'bottom'
+	  });
+
+	  toast.onDidDismiss(() => {
+		console.log('Dismissed toast');
+	  });
+
+	  toast.present();
   }
 }
