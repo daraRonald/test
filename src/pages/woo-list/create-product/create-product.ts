@@ -130,6 +130,7 @@ export class CreateProductPage {
 			  text: 'Upload File',
 			  handler: () => {
 				this.getImage();
+				this.uploadFile();
 			  }
 			 },
 			 {
@@ -152,7 +153,7 @@ export class CreateProductPage {
   }
   
   onCreateProduct(){
-    this.wordpressProvider.createProduct(this.name, this.content,this.price,this.sale_price,this.pimage).subscribe(data => {
+    this.wordpressProvider.createProduct(this.name, this.content,this.price,this.sale_price,this.pimageFile).subscribe(data => {
       console.log(data);
       alert('Product is created!');
       this.navCtrl.setRoot('WooListPage');
