@@ -1,0 +1,20 @@
+<!--
+  Generated template for the ImagePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>image</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<button ion-button block (click)="getImage()">Get Photo</button>
+		<img [src]="imageUrl" hidden="hiddenImage" style="width: 100%; height: auto;"/>
+	<button ion-button block (click)="uploadFile()">Upload Photo</button>	
+</ion-content>

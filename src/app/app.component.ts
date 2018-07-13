@@ -24,7 +24,7 @@ export class MyApp {
       { title: 'Products', component: 'WooListPage' },
       { title: 'Orders', component: 'OrderPage' },
       { title: 'Contact', component: 'ContactPage' },
-      
+       { title: 'Image Upload', component: 'ImagePage' },
     ];
 
   }

@@ -77,18 +77,17 @@ export class CreateProductPage {
 		fileName: 'ionicfile',
 		chunkedMode: false,
 		mimeType: "image/jpeg",
-		headers: {'Content-Type': 'application/json',
-				  'Authorization': `Bearer ${token}`}
+		headers: {'Authorization': `Bearer ${token}`}
 	  }
 
 	  fileTransfer.upload(this.imageURI, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', options)
 		.then((data) => {
-		console.log(data+" Uploaded Successfully");
+		console.log(JSON.stringify(data)+" Uploaded Successfully");
 		this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
 		loader.dismiss();
 		this.presentToast("Image uploaded successfully");
 	  }, (err) => {
-		console.log(err);
+		console.log(JSON.stringify(err));
 		loader.dismiss();
 		this.presentToast(err);
 	  });
@@ -106,7 +105,7 @@ export class CreateProductPage {
 	  });
 
 	  toast.present();
-	}
+  }
 
   getPhoto() {
 	  const actionSheet = this.actionSheetCtrl.create({
