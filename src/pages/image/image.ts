@@ -25,9 +25,9 @@ export class ImagePage {
   
   getImage() {
 	  const options: CameraOptions = {
-		quality			   : 100,
+		quality			   : 50,
 		destinationType	   : this._CAMERA.DestinationType.DATA_URL,
-		sourceType		   : this._CAMERA.PictureSourceType.CAMERA,
+		sourceType		   : this._CAMERA.PictureSourceType.PHOTOLIBRARY,
 		allowEdit		   : false,
 		targetWidth        : 512,
         targetHeight       : 512,
