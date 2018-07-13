@@ -26,12 +26,9 @@
       <ion-input type="number" placeholder="sale_price" [(ngModel)]="sale_price"></ion-input>
     </ion-item>
     <ion-card>
-		<ion-label color="primary" id="product-image">Product Image :  {{imageURI}} </ion-label>
-		<button ion-button block (click)="getImage()">Get Photo</button>
-		  <ion-avatar>
-		  
-		  <img [src]="imageURI ? imageURI : placeholder_picture" >
-		</ion-avatar>
+		<ion-label color="primary" id="product-image">Product Image : </ion-label>
+		<button ion-button block (click)="getPhoto()">Get Photo</button>
+			<img [src]="imageURI ? imageURI : placeholder_picture" [hidden]="hiddenImage" style="width: 100%; height: auto;"/>
 		<button ion-button block (click)="uploadFile()">Upload Image to Media</button>
 	</ion-card>
    

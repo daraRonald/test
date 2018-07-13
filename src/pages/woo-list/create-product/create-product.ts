@@ -23,9 +23,11 @@ export class CreateProductPage {
   sale_price;
   image;
   pimage;
+  pimageFile;
   
-  imageURI:any;
-  imageFileName:any;
+  imageUrl;
+  imageData;
+  hiddenImage= true;
 
   placeholder_picture = "assets/images/pimage.png";
 
@@ -39,7 +41,6 @@ export class CreateProductPage {
 			  public loadingCtrl: LoadingController,
 			  public toastCtrl: ToastController,
 			  private transfer: Transfer, 
-			  private ftransfer: FileTransfer, 
 			  private _CAMERA : Camera) {}
 
   ionViewDidLoad() {
@@ -48,56 +49,58 @@ export class CreateProductPage {
   
   getImage() {
 	  const options: CameraOptions = {
-		quality: 100,
-		destinationType: this._CAMERA.DestinationType.FILE_URI,
-		sourceType: this._CAMERA.PictureSourceType.PHOTOLIBRARY
+		quality			   : 100,
+		destinationType	   : this._CAMERA.DestinationType.DATA_URL,
+		sourceType		   : this._CAMERA.PictureSourceType.PHOTOLIBRARY,
+		allowEdit		   : false,
+		targetWidth        : 512,
+        targetHeight       : 512,
+        encodingType       : this._CAMERA.EncodingType.JPEG,
+        mediaType          : this._CAMERA.MediaType.PICTURE,
+		correctOrientation : true
 	  }
 
 	  this._CAMERA.getPicture(options).then((imageData) => {
-		this.imageURI = imageData;
+		this.imageData = imageData;
+		this.imageUrl = "data:image/jpeg;base64," + imageData;
+		this.hiddenImage = false;
 	  }, (err) => {
 		console.log(err);
 		this.presentToast(err);
 	  });
-	}
-
+  }
+  
   uploadFile() {
-	  let loader = this.loadingCtrl.create({
+    let loader = this.loadingCtrl.create({
 		content: "Uploading..."
 	  });
 	  loader.present();
 	  
-	  let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
-		alert(token);
+	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		
-	  const fileTransfer: FileTransferObject = this.ftransfer.create();
-
-	  let options: FileUploadOptions = {
-		fileKey: 'ionicfile',
-		fileName: 'ionicfile',
-		chunkedMode: false,
-		mimeType: "image/jpeg",
-		headers: {'Authorization': `Bearer ${token}`}
-	  }
-
-	  fileTransfer.upload(this.imageURI, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', options)
-		.then((data) => {
-		console.log(JSON.stringify(data)+" Uploaded Successfully");
-		this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
+	let trans = this.transfer.create();
+  
+	trans.upload(this.imageUrl , "https://mobileapp.tworksystem.org/wp-json/wp/v2/media", { headers : {
+		"Authorization": `Bearer ${token}`,
+		"content-disposition": "attachment; filename=\'tworksystem1.jpeg\'"
+	} }).then((res)=> {
+		let response = res.response;
+		this.pimageFile = JSON.parse(response);
+		
 		loader.dismiss();
 		this.presentToast("Image uploaded successfully");
-	  }, (err) => {
-		console.log(JSON.stringify(err));
+	}).catch((err)=> {
 		loader.dismiss();
 		this.presentToast(err);
-	  });
-	}
-	
+	});
+  }
+  
   presentToast(msg) {
+	  
 	  let toast = this.toastCtrl.create({
 		message: msg,
 		duration: 3000,
-		position: 'bottom'
+		position: 'top'
 	  });
 
 	  toast.onDidDismiss(() => {
@@ -126,7 +129,7 @@ export class CreateProductPage {
 			{
 			  text: 'Upload File',
 			  handler: () => {
-				this.selectImage();
+				this.getImage();
 			  }
 			 },
 			 {
@@ -147,52 +150,6 @@ export class CreateProductPage {
 		actionSheet.present();
 	  
   }
-
-  selectImage() {
-      
-         let cameraOptions : CameraOptions = {
-             sourceType         : this._CAMERA.PictureSourceType.PHOTOLIBRARY,
-             destinationType    : this._CAMERA.DestinationType.DATA_URL,
-             quality            : 100,
-             targetWidth        : 320,
-             targetHeight       : 240,
-             encodingType       : this._CAMERA.EncodingType.PNG,
-             mediaType          : this._CAMERA.MediaType.PICTURE,
-             correctOrientation : true
-         };
-
-         this._CAMERA.getPicture(cameraOptions)
-         .then((data) =>
-         {
-            this.pimage = "data:image/png;base64," + data;
-         });
-         
-		
-	  
-      
-   }
-   
-  uploadImages() {
-		let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
-		alert(token);
-
-		let headers = new HttpHeaders({
-		  'Content-Type': 'application/json',
-		  'content-disposition': "attachment; filename=\'twork1.png\'",
-		  'Authorization': `Bearer ${token}`
-		});
-		
-		const fileTransfer: TransferObject = this.transfer.create();
-		
-		fileTransfer.upload( this.pimage, 'https://mobileapp.tworksystem.org/wp-json/wp/v2/media', { headers : headers }).then(data => {
-		
-		
-		alert(JSON.stringify(data));
-	  }, err => {
-		
-		alert(JSON.stringify(err));
-	  });
-   }
   
   onCreateProduct(){
     this.wordpressProvider.createProduct(this.name, this.content,this.price,this.sale_price,this.pimage).subscribe(data => {
