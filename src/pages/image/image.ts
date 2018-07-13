@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Transfer } from '@ionic-native/transfer';
 
-
 @IonicPage()
 @Component({
   selector: 'page-image',
@@ -58,12 +57,13 @@ export class ImagePage {
 	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		
 	let trans = this.transfer.create();
-	
-	trans.upload(this.imageUrl , "https://mobileapp.tworksystem.org/wp-json/wp/v2/media", {
-	headers: {"Authorization": `Bearer ${token}`,
-			  "content-disposition": "attachment; filename=\'tworksystem1.jpeg\'"
-			  }
-	}).then((res)=> {
+  
+	trans.upload(this.imageUrl , "https://mobileapp.tworksystem.org/wp-json/wp/v2/media", { headers : {
+		"Authorization": `Bearer ${token}`,
+		"content-disposition": "attachment; filename=\'tworksystem1.jpeg\'"
+	} }).then((res)=> {
+		let response = res.response;
+		alert(JSON.stringify(response));
 		loader.dismiss();
 		this.presentToast("Image uploaded successfully");
 	}).catch((err)=> {
@@ -77,7 +77,7 @@ export class ImagePage {
 	  let toast = this.toastCtrl.create({
 		message: msg,
 		duration: 3000,
-		position: 'bottom'
+		position: 'top'
 	  });
 
 	  toast.onDidDismiss(() => {
