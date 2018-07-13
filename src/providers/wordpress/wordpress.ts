@@ -121,13 +121,27 @@ export class WordpressProvider {
   }
   
   createProduct(name, content, price, sale_price,image){
-    
+    alert(JSON.stringify(image));
+    let pimage = {
+		id: image.id,
+		date_created: image.date,
+		date_created_gmt: image.date_gmt,
+		date_modified: image.modified,
+		date_modified_gmt: image.modified_gmt,
+		src: image.guid.rendered,
+		name: image.title.rendered,
+		alt: image.alt_text,
+		position: 0
+    };
+    let pimages = {
+		0 : pimage
+    };
     let data = {
       name: name,
       description: content,
       regular_price: price,
       sale_price: sale_price,
-      images : image,
+      images : pimages,
       status: 'publish'
     };
     console.log(data);
@@ -220,4 +234,17 @@ export class WordpressProvider {
     let url = this.api_url_order;
 	  return this.http.put( url+'/'+id, data, {headers: headers} );
   }
+  
+  getMedia() {
+	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+	  console.log(token);
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  let url = this.api_url + 'media';
+	return this.http.get(url, {headers: headers} );
+  }
+  
 }

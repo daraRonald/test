@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController, LoadingController, ToastController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ActionSheetController, LoadingController, ToastController, ModalController } from 'ionic-angular';
 import { WordpressProvider} from '../../../providers/wordpress/wordpress';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
@@ -40,6 +40,7 @@ export class CreateProductPage {
 			  private _IMG: ImageProvider,
 			  public loadingCtrl: LoadingController,
 			  public toastCtrl: ToastController,
+			  public modalCtrl: ModalController,
 			  private transfer: Transfer, 
 			  private _CAMERA : Camera) {}
 
@@ -118,19 +119,14 @@ export class CreateProductPage {
 			  text: 'Media Library',
 			  role: 'media',
 			  handler: () => {
-				this._IMG.selectImage()
-				  .then((data) =>
-				  {
-					 this.image = data;
-					 alert(this.image);
-				  });
+				 let profileModal = this.modalCtrl.create('MediaPage');
+					 profileModal.present();
 			  }
 			},
 			{
 			  text: 'Upload File',
 			  handler: () => {
 				this.getImage();
-				this.uploadFile();
 			  }
 			 },
 			 {
