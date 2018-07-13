@@ -77,7 +77,7 @@ export class ImagePage {
 	  let toast = this.toastCtrl.create({
 		message: msg,
 		duration: 3000,
-		position: 'bottom'
+		position: 'top'
 	  });
 
 	  toast.onDidDismiss(() => {
