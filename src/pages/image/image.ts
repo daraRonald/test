@@ -64,7 +64,7 @@ export class ImagePage {
 				  "content-disposition": "attachment; filename=\'tworksystem1.jpeg\'"
 				 }
 	}).then((res)=> {
-		alert(JSON.stringify(res));
+		//alert(JSON.stringify(res));
 		loader.dismiss();
 		this.presentToast("Image uploaded successfully");
 	}).catch((err)=> {
