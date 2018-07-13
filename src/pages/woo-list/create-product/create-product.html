@@ -11,13 +11,12 @@
 
 
 <ion-content padding>
-
   <ion-list>
 	<ion-item>
       <ion-input type="text" placeholder="name" [(ngModel)]="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="content" [(ngModel)]="content"></ion-input>
+      <ion-textarea type="text" placeholder="content" [(ngModel)]="content"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-input type="number" placeholder="price" [(ngModel)]="price"></ion-input>
@@ -28,7 +27,7 @@
     <ion-card>
 		<ion-label color="primary" id="product-image">Product Image : </ion-label>
 		<button ion-button block (click)="getPhoto()">Get Photo</button>
-			<img [src]="imageURI ? imageURI : placeholder_picture" [hidden]="hiddenImage" style="width: 100%; height: auto;"/>
+			<img [src]="imageUrl ? imageUrl : placeholder_picture" [hidden]="hiddenImage" style="width: 100%; height: auto;"/>
 		<button ion-button block (click)="uploadFile()">Upload Image to Media</button>
 	</ion-card>
    
