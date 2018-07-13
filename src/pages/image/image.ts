@@ -58,13 +58,12 @@ export class ImagePage {
 	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 		
 	let trans = this.transfer.create();
-	  
+	
 	trans.upload(this.imageUrl , "https://mobileapp.tworksystem.org/wp-json/wp/v2/media", {
-		headers: {"Authorization": `Bearer ${token}`,
-				  "content-disposition": "attachment; filename=\'tworksystem1.jpeg\'"
-				 }
+	headers: {"Authorization": `Bearer ${token}`,
+			  "content-disposition": "attachment; filename=\'tworksystem1.jpeg\'"
+			  }
 	}).then((res)=> {
-		//alert(JSON.stringify(res));
 		loader.dismiss();
 		this.presentToast("Image uploaded successfully");
 	}).catch((err)=> {
