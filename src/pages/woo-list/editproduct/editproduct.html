@@ -36,10 +36,9 @@
 		
 		<ion-card>
 			<ion-label color="primary" id="product-image">Product Image :</ion-label>
-			  <ion-avatar>
-			  <input type="hidden" name="image" formControlName="productimage" [(ngModel)]="productimage">
+			 
 			  <img [src]="productimage ? productimage : placeholder_picture" (click)="getPhoto()">
-			</ion-avatar>
+			
 		</ion-card>
     </ion-list>
     

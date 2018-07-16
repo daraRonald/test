@@ -116,7 +116,6 @@ export class WordpressProvider {
   }
   
   createProduct(name, content, price, sale_price,image){
-    alert(JSON.stringify(image));
     let pimage = {
 		id: image.id,
 		date_created: image.date,
@@ -169,13 +168,21 @@ export class WordpressProvider {
      
   }
   
-  editProduct(product:any, id:number) {
-	
-	let image = {
-		src : product.productimage
-	};
+  editProduct(product:any,image:any, id:number) {
+	let pimage = {
+		id: image.id,
+		date_created: image.date,
+		date_created_gmt: image.date_gmt,
+		date_modified: image.modified,
+		date_modified_gmt: image.modified_gmt,
+		src: image.guid.rendered,
+		name: image.title.rendered,
+		alt: image.alt_text,
+		position: 0
+    };
+    
 	let productimage = {
-		0 : image
+		0 : pimage
 	};
 	 
     let data = {
@@ -186,9 +193,6 @@ export class WordpressProvider {
       images: productimage,
       status: 'publish'
     };
-   
-
-    alert(JSON.stringify(data));
 
     let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
     console.log(token);

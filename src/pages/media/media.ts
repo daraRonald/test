@@ -47,6 +47,10 @@ export class MediaPage {
    });
  }
  
+ cancel() {
+	this.viewCtrl.dismiss();
+ }
+ 
   doInfinite(infiniteScroll) {
     let page = (Math.ceil(this.media.length/16)) + 1;
     let loading = true;

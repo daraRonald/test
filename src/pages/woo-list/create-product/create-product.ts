@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController, LoadingController, ToastController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, LoadingController, ToastController, ModalController } from 'ionic-angular';
 import { WordpressProvider} from '../../../providers/wordpress/wordpress';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
@@ -7,7 +7,7 @@ import { ImageProvider } from '../../../providers/image/image';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+//import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 
 
@@ -48,29 +48,43 @@ export class CreateProductPage {
     console.log('ionViewDidLoad CreateProductPage');
   }
   
-  getImage() {
-	  const options: CameraOptions = {
-		quality			   : 100,
-		destinationType	   : this._CAMERA.DestinationType.DATA_URL,
-		sourceType		   : this._CAMERA.PictureSourceType.PHOTOLIBRARY,
-		allowEdit		   : false,
-		targetWidth        : 512,
-        targetHeight       : 512,
-        encodingType       : this._CAMERA.EncodingType.JPEG,
-        mediaType          : this._CAMERA.MediaType.PICTURE,
-		correctOrientation : true
-	  }
-
-	  this._CAMERA.getPicture(options).then((imageData) => {
-		this.imageData = imageData;
-		this.imageUrl = "data:image/jpeg;base64," + imageData;
-		this.hiddenImage = false;
-		this.uploadFile();
-	  }, (err) => {
-		console.log(err);
-		this.presentToast(err);
-	  });
-	  
+  getPhoto() {
+	  const actionSheet = this.actionSheetCtrl.create({
+		  title: 'Upload Your Photo...',
+		  buttons: [
+			{
+			  text: 'Media Library',
+			  role: 'media',
+			  handler: () => {
+				 let profileModal = this.modalCtrl.create('MediaPage');
+				 profileModal.onDidDismiss(data => {
+				   console.log(data);
+				   this.imageUrl= data.guid.rendered;
+				   this.pimageFile = data;
+			     });
+				 profileModal.present();
+			  }
+			},
+			{
+			  text: 'Upload File',
+			  handler: () => {
+				this._IMG.selectImage().then(data=>{
+				
+				   this.imageUrl= data;
+				   this.uploadFile();
+				});
+			  }
+			 },
+			 {
+			  text: 'Cancel',
+			  role: 'cancel',
+			  handler: () => {
+				console.log('Cancel clicked');
+			  }
+			}
+		  ]
+		});
+		actionSheet.present();
 	  
   }
   
@@ -112,42 +126,6 @@ export class CreateProductPage {
 	  });
 
 	  toast.present();
-  }
-
-  getPhoto() {
-	  const actionSheet = this.actionSheetCtrl.create({
-		  title: 'Upload Your Photo...',
-		  buttons: [
-			{
-			  text: 'Media Library',
-			  role: 'media',
-			  handler: () => {
-				 let profileModal = this.modalCtrl.create('MediaPage');
-				 profileModal.onDidDismiss(data => {
-				   console.log(data);
-				   this.imageUrl= data.guid.rendered;
-				   this.pimageFile = data;
-			     });
-				 profileModal.present();
-			  }
-			},
-			{
-			  text: 'Upload File',
-			  handler: () => {
-				this.getImage();
-			  }
-			 },
-			 {
-			  text: 'Cancel',
-			  role: 'cancel',
-			  handler: () => {
-				console.log('Cancel clicked');
-			  }
-			}
-		  ]
-		});
-		actionSheet.present();
-	  
   }
   
   onCreateProduct(){

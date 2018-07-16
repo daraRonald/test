@@ -40,7 +40,7 @@ export class OrderPage {
 
   
   
-  postTapped(event, order) {
+  itemTapped(event, order) {
 		this.navCtrl.push('OrderDetailPage', {order});
   }
 

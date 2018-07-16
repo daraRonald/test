@@ -10,29 +10,61 @@
 </ion-header>
 
 <ion-content class="content">
-  <ion-card *ngFor="let order of orders" >
-    
-    <ion-card-title><h2>Order Number : {{order.id}}</h2> ({{order.status}})</ion-card-title>
-    <ion-card-content> 
+  <ion-card *ngFor="let order of orders" (tap)="itemTapped($event, order)"> 
+    <ion-card-title><h2>Order Number : #{{order.id}} <button ion-button small>{{order.status}}</button></h2></ion-card-title>
+    <ion-card-content no-padding> 
+		<ion-row no-padding>
+		   	   
+		   <ion-col col-5>
+			Payment
+		   </ion-col>
+		   <ion-col col-1>
+			 :
+		   </ion-col>
+		   <ion-col col-6>
+			{{order.payment_method_title}}
+		   </ion-col>
+		   
+		   <ion-col col-5>
+			Customer
+		   </ion-col>
+		   <ion-col col-1>
+			 :
+		   </ion-col>
+		   <ion-col col-6>
+			{{order.billing.first_name}} {{order.billing.last_name}} 
+		   </ion-col>
+		   
+		   <ion-col col-5>
+			Total
+		   </ion-col>
+		   <ion-col col-1>
+			 :
+		   </ion-col>
+		   <ion-col col-3>
+			{{order.total}}
+		   </ion-col>
+		   <ion-col col-3>
+			( {{order.line_items.length}} Items )
+		   </ion-col>
+		   
+		   <ion-col col-5>
+			Date
+		   </ion-col>
+		   <ion-col col-1>
+			 :
+		   </ion-col>
+		   <ion-col col-6>
+			{{order.date_created.split('T')[0]}}
+		   </ion-col>
 		
+		 </ion-row>
     </ion-card-content>
-    <ion-row no-padding>
-       <ion-col>
-         <button ion-button clear small color="primary" icon-start>
-           {{order.date_created.split('T')[0]}}
-         </button>
-       </ion-col>
-       <ion-col text-right>
-         <button ion-button small color="primary" (click)="postTapped($event, order)" icon-start>
-            Read More
-         </button>
-       </ion-col>
-     </ion-row>
   </ion-card>
   <ion-infinite-scroll [enabled]="morePagesAvailable" (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content
     loadingSpinner="bubbles"
-    loadingText="Loading more posts ...">
+    loadingText="Loading more orders ...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
