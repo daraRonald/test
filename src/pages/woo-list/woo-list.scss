@@ -1,38 +1,35 @@
 page-woo-list {
-	.woocommerce.post-list {
-		
-		ion-card {
-			background: linear-gradient(45deg, #b8c2d8, #667aa3);
-			padding: 10px;
-			border-radius: 5px;
-			
-		}
-
-		.item h2 {
-			font-size: 1.8rem;
-			font-weight: bold;
-			margin-bottom: 5px;
-			color: #444;
-		}
-
-		.product-price {
-			font-size: 1.6rem;
-			font-weight: 500;
-			margin-bottom: 5px;
-			color: Green;
-		}
-		.product-rating {
-			font-size: 1.3rem;
-			margin-bottom: 5px;
-			color: #000;
-		}
-	} 
 	
 	ion-row {
 		ion-col {
 			ion-card {
-				text-align: center;
+				.product-price {
+					text-decoration: line-through;
+				}
+				
+				ion-thumbnail {
+					border-top-left-radius: 5px;
+					border-top-right-radius: 5px;
+					border-bottom-left-radius: 0px;
+					border-bottom-right-radius: 0px;
+					background: linear-gradient(45deg, #b8c2d8, #667aa3);
+				}
+				
+				
+				.product-text {
+					background: linear-gradient(45deg, #b8c2d8, #667aa3);
+					text-align: center;
+					font-weight: bold;
+					border-top-left-radius: 0px;
+					border-top-right-radius: 0px;
+					padding: 5px;
+				
+					.product-price {
+						text-decoration: line-through;
+					}
+			    }
 			}
+				
 		}
 	}
 }

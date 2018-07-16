@@ -32,40 +32,22 @@
 			 <ion-thumbnail item-start *ngIf="item.images">
 				<img src="{{item.images[0].src}}">
 			 </ion-thumbnail>
-
-			<h2 *ngIf="item.name" [innerHTML]="item.name"></h2>
-
-			<p *ngIf="item.price || item.regular_price" class="product-price">${{item.regular_price}}</p>
-
-			<p *ngIf="item.sale_price" class="product-price">Sale! ${{item.sale_price}}</p>
-
-			<p *ngIf="item.average_rating != '0.00'" class="product-rating"><em>Rating: {{item.average_rating}} stars</em></p>
-						
+			<div class="product-text">
+				<h2 *ngIf="item.name" [innerHTML]="item.name"></h2>
+			
+				<div *ngIf="item.regular_price == item.price">
+					<p><span style="color: red; font-size: 18px; font-weight: bold; font-family: 'Signika';">Sale! </span> {{item.regular_price}}</p>
+				</div>
+			
+				<div *ngIf="item.regular_price != item.price">
+					<p><span style="color: red; font-size: 16px; font-weight: bold; font-family: 'Signika';">Price >> </span> <span class="product-price">{{item.regular_price}}</span></p>
+					<p><span style="color: red; font-size: 18px; font-weight: bold; font-family: 'Signika';">Sale! </span> {{item.price}}</p>
+				</div>
+			</div>
+		
 		</ion-card>
 	  </ion-col>
   </ion-row>
-	
-  <div class="post-list woocommerce">
-
-    <ion-card *ngFor="let item of items" (tap)="itemTapped($event, item)">
-
-    	<ion-thumbnail item-start *ngIf="item.images">
-	      <img src="{{item.images[0].src}}">
-	    </ion-thumbnail>
-
-		<h2 *ngIf="item.name" [innerHTML]="item.name"></h2>
-
-		<p *ngIf="item.price || item.regular_price" class="product-price">${{item.regular_price}}</p>
-
-    	<p *ngIf="item.sale_price" class="product-price">Sale! ${{item.sale_price}}</p>
-
-		<p *ngIf="item.description" [innerHTML]="item.description" style="color:#000;" class="product-description"></p>
-
-		<p *ngIf="item.average_rating != '0.00'" class="product-rating"><em>Rating: {{item.average_rating}} stars</em></p>
-
-    </ion-card>
-
-  </div>
 
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
