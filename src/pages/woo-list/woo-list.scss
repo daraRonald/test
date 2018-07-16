@@ -27,4 +27,12 @@ page-woo-list {
 			color: #000;
 		}
 	} 
+	
+	ion-row {
+		ion-col {
+			ion-card {
+				text-align: center;
+			}
+		}
+	}
 }

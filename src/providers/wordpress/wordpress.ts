@@ -134,6 +134,7 @@ export class WordpressProvider {
     let data = {
       name: name,
       description: content,
+      price: price,
       regular_price: price,
       sale_price: sale_price,
       images : pimages,

@@ -26,6 +26,25 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   
+  <ion-row wrap>
+	  <ion-col no-padding col-6 *ngFor="let item of items">  
+		  <ion-card (tap)="itemTapped($event, item)">	
+			 <ion-thumbnail item-start *ngIf="item.images">
+				<img src="{{item.images[0].src}}">
+			 </ion-thumbnail>
+
+			<h2 *ngIf="item.name" [innerHTML]="item.name"></h2>
+
+			<p *ngIf="item.price || item.regular_price" class="product-price">${{item.regular_price}}</p>
+
+			<p *ngIf="item.sale_price" class="product-price">Sale! ${{item.sale_price}}</p>
+
+			<p *ngIf="item.average_rating != '0.00'" class="product-rating"><em>Rating: {{item.average_rating}} stars</em></p>
+						
+		</ion-card>
+	  </ion-col>
+  </ion-row>
+	
   <div class="post-list woocommerce">
 
     <ion-card *ngFor="let item of items" (tap)="itemTapped($event, item)">
