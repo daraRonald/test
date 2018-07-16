@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { WordpressProvider} from '../../providers/wordpress/wordpress';
 
 
@@ -9,12 +9,15 @@ import { WordpressProvider} from '../../providers/wordpress/wordpress';
   templateUrl: 'media.html',
 })
 export class MediaPage {
-
-  media : any;
+  autoManufacturers;
+  media;
+  mimage : any;
+  morePagesAvailable: boolean = true;
   grid: Array<Array<string>>;
   
   constructor(public navCtrl: NavController, 
 			  public navParams: NavParams,
+			  public viewCtrl: ViewController,
 			  private wordpressProvider: WordpressProvider) {
   }
 
@@ -31,6 +34,38 @@ export class MediaPage {
       
     });
     
-    
   }
+  
+  dismiss() {
+  
+   console.log(this.autoManufacturers);
+   this.wordpressProvider.getMediaByID(this.autoManufacturers).subscribe(data => {
+      this.mimage = data;
+      console.log(this.mimage);
+  
+   this.viewCtrl.dismiss(this.mimage);
+   });
+ }
+ 
+  doInfinite(infiniteScroll) {
+    let page = (Math.ceil(this.media.length/16)) + 1;
+    let loading = true;
+
+    this.wordpressProvider.getMedia(page)
+    .subscribe(data => {
+    let med : any = data;
+      for(let m of med){
+        if(!loading){
+          infiniteScroll.complete();
+        }
+        m.description.rendered = m.description.rendered.split('<a')[0] + "</p>";
+        this.media.push(m);
+        loading = false;
+        this.morePagesAvailable = false;
+      }
+    }, err => {
+      this.morePagesAvailable = false;
+    })
+  }
+  
 }

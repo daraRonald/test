@@ -26,9 +26,8 @@
     </ion-item>
     <ion-card>
 		<ion-label color="primary" id="product-image">Product Image : </ion-label>
-		<button ion-button block>Get Photo</button>
 			<img [src]="imageUrl ? imageUrl : placeholder_picture" (click)="getPhoto()" style="width: 100%; height: auto;" />
-		<button ion-button block (click)="uploadFile()">Upload Image to Media</button>
+			
 	</ion-card>
    
   </ion-list>

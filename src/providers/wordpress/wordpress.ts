@@ -4,12 +4,7 @@ import {environment} from '../../envrionment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
-/*
-  Generated class for the QuotesProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class WordpressProvider {
   api_url = environment.site_url+environment.data_url;
@@ -156,7 +151,7 @@ export class WordpressProvider {
     return this.http.post(this.api_url_create_product, data, {headers: headers});
   }
   
-  deleteProduct(id:number): Observable<any>{
+  deleteProduct(id:number): Observable<any> {
     
     console.log(id);
 	
@@ -174,7 +169,7 @@ export class WordpressProvider {
      
   }
   
-  editProduct(product:any, id:number){
+  editProduct(product:any, id:number) {
 	
 	let image = {
 		src : product.productimage
@@ -235,7 +230,7 @@ export class WordpressProvider {
 	  return this.http.put( url+'/'+id, data, {headers: headers} );
   }
   
-  getMedia() {
+  getMedia(page:number = 1) {
 	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 	  console.log(token);
 
@@ -243,7 +238,19 @@ export class WordpressProvider {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-  let url = this.api_url + 'media';
+  let url = this.api_url + 'media?per_page=16&page=' + page;
+	return this.http.get(url, {headers: headers} );
+  }
+  
+  getMediaByID(id) {
+	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+	  console.log(token);
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  let url = this.api_url + 'media/' + id;
 	return this.http.get(url, {headers: headers} );
   }
   

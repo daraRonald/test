@@ -65,10 +65,13 @@ export class CreateProductPage {
 		this.imageData = imageData;
 		this.imageUrl = "data:image/jpeg;base64," + imageData;
 		this.hiddenImage = false;
+		this.uploadFile();
 	  }, (err) => {
 		console.log(err);
 		this.presentToast(err);
 	  });
+	  
+	  
   }
   
   uploadFile() {
@@ -120,7 +123,12 @@ export class CreateProductPage {
 			  role: 'media',
 			  handler: () => {
 				 let profileModal = this.modalCtrl.create('MediaPage');
-					 profileModal.present();
+				 profileModal.onDidDismiss(data => {
+				   console.log(data);
+				   this.imageUrl= data.guid.rendered;
+				   this.pimageFile = data;
+			     });
+				 profileModal.present();
 			  }
 			},
 			{
@@ -130,16 +138,10 @@ export class CreateProductPage {
 			  }
 			 },
 			 {
-			  text: 'Take Picture',
-			  handler: () => {
-				alert('Take Pic clicked');
-			  }
-			 },
-			 {
 			  text: 'Cancel',
 			  role: 'cancel',
 			  handler: () => {
-				alert('Cancel clicked');
+				console.log('Cancel clicked');
 			  }
 			}
 		  ]
