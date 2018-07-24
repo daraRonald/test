@@ -11,7 +11,8 @@ export class WordpressProvider {
   api_url_create_post = environment.site_url+environment.posts_url;
   api_url_create_product = environment.site_url+environment.products_url;
   api_url_order = environment.site_url+environment.orders_url;
- 
+  api_url_report = environment.site_url+environment.reports_url;
+  imageData;
   
   constructor(public http: HttpClient) {
     console.log('Hello PostsProvider Provider');
@@ -115,6 +116,18 @@ export class WordpressProvider {
 	return this.http.delete(url, httpOptions);
   }
   
+  getProduct() {
+	  let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+		  console.log(token);
+
+		let headers = new HttpHeaders({
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${token}`
+		});
+	  
+		return this.http.get(this.api_url_create_product, {headers: headers} );
+  }
+  
   createProduct(name, content, price, sale_price,image){
     let pimage = {
 		id: image.id,
@@ -168,32 +181,51 @@ export class WordpressProvider {
      
   }
   
-  editProduct(product:any,image:any, id:number) {
+  editProduct(product:any,imageOld:any,imageNew:any, id:number) {
+  
+  if(imageNew != null) {
+  
 	let pimage = {
-		id: image.id,
-		date_created: image.date,
-		date_created_gmt: image.date_gmt,
-		date_modified: image.modified,
-		date_modified_gmt: image.modified_gmt,
-		src: image.guid.rendered,
-		name: image.title.rendered,
-		alt: image.alt_text,
+		id: imageNew.id,
+		date_created: imageNew.date,
+		date_created_gmt: imageNew.date_gmt,
+		date_modified: imageNew.modified,
+		date_modified_gmt: imageNew.modified_gmt,
+		src: imageNew.guid.rendered,
+		name: imageNew.title.rendered,
+		alt: imageNew.alt_text,
 		position: 0
     };
     
 	let productimage = {
 		0 : pimage
 	};
-	 
-    let data = {
+	
+	this.imageData= {
       name: product.productname,
       description: product.productdescription,
-      price: product.productprice,
+      regular_price: product.productprice,
       sale_price: product.productsprice,
       images: productimage,
       status: 'publish'
     };
 
+  }
+  else {
+  
+	this.imageData= {
+      name: product.productname,
+      description: product.productdescription,
+      regular_price: product.productprice,
+      sale_price: product.productsprice,
+      images: imageOld,
+      status: 'publish'
+    };
+	
+  }
+	
+	 
+    
     let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
     console.log(token);
 
@@ -201,7 +233,7 @@ export class WordpressProvider {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put(this.api_url_create_product+'/'+id, data, {headers: headers});
+    return this.http.put(this.api_url_create_product+'/'+id, this.imageData, {headers: headers});
   }
 
   getOrders(page:number = 1) {
@@ -234,6 +266,18 @@ export class WordpressProvider {
 	  return this.http.put( url+'/'+id, data, {headers: headers} );
   }
   
+  getOrdersByFilter(filter) {
+	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+	  console.log(token);
+
+    let headers = new HttpHeaders({
+		'Content-Type': 'application/json',
+		'Authorization': `Bearer ${token}`
+	});
+	let url = this.api_url_order + '?' + filter;
+	return this.http.get(url, {headers: headers} );
+  }
+  
   getMedia(page:number = 1) {
 	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
 	  console.log(token);
@@ -255,6 +299,30 @@ export class WordpressProvider {
       'Authorization': `Bearer ${token}`
     });
   let url = this.api_url + 'media/' + id;
+	return this.http.get(url, {headers: headers} );
+  }
+  
+  getReports() {
+	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+	  console.log(token);
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  let url = this.api_url_report + '/sales';
+	return this.http.get(url, {headers: headers} );
+  }
+  
+  getTopseller() {
+	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+	  console.log(token);
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  let url = this.api_url_report + '/top_sellers?period=month';
 	return this.http.get(url, {headers: headers} );
   }
   

@@ -28,7 +28,8 @@ export class EditProductPage {
   productdescription : string; 
   productprice :any;
   productsprice : any;	
-  productimage : any;	
+  productimage : any;
+  productimageNew : any;	
   pimage : any;  
   pimageFile: any;
   placeholder_picture = "assets/images/pimage.png";
@@ -95,7 +96,7 @@ export class EditProductPage {
 				 profileModal.onDidDismiss(data => {
 				   console.log(data);
 				   if(data != null) {
-					 this.productimage= data.guid.rendered;
+					 this.productimageNew = data.guid.rendered;
 					 this.pimageFile = data;
 				   }
 			     });
@@ -107,7 +108,7 @@ export class EditProductPage {
 			  handler: () => {
 				this._IMG.selectImage().then(data=>{
 				
-				   this.productimage= data;
+				   this.productimageNew = data;
 				   this.uploadFile();
 				});
 				
@@ -166,8 +167,7 @@ export class EditProductPage {
 	  }
 
   updateProduct(values){
-  
-    this.wordpressProvider.editProduct(values, this.pimageFile, this.product.id).subscribe(data => {
+    this.wordpressProvider.editProduct(values, this.pimage, this.pimageFile, this.product.id).subscribe(data => {
 		  console.log(data);
 		alert('Product is Completely Edited!');
 		this.navCtrl.setRoot('WooListPage');

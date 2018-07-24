@@ -16,29 +16,53 @@
 // automatically applied to the <body> element in the app.
 
 .card-background-page {
+	
+ 
 
-  ion-card {
-    position: relative;
-    text-align: center;
-    margin: 0px !important;
-    width: 100% !important;
+
+  .menu-header {
+    padding: 5px 15px;
+    background-image: url('../assets/images/2.png');
+    background-size: cover;
+    height: 25%;
+    color: white;
+    
+    .email {
+      font-weight: 500;
+      text-align: right;
+    }
+    
+    .user-avatar {
+		margin-top: 15px;
+		padding: .4em;
+		border-radius: 50%;
+		height: 10vh;
+	  }
+    .card-title {
+		position: absolute;
+		top:8%;
+		font-size: 1.4em;
+		text-align: right;
+		width: 90%;
+		font-weight: bold;
+		color: #fff;
+	  }
   }
-
-  .card-title {
-    position: absolute;
-    top: 36%;
-    font-size: 1.8em;
-    width: 100%;
-    font-weight: bold;
-    color: #fff;
+  
+  ion-list {
+	button {
+		background: linear-gradient(45deg, #b8c2d8, #667aa3);
+	}
+	
   }
+  
+}
 
-  .card-subtitle {
-    font-size: 1.2em;
-    position: absolute;
-    top: 70%;
-    width: 100%;
-    color: #ededed;
-  }
-
+ion-header {
+	ion-toolbar {
+		ion-title {
+		background: linear-gradient(45deg, #b8c2d8, #667aa3);
+		}
+	}
+	
 }

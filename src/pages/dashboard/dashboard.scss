@@ -1,0 +1,18 @@
+page-dashboard {
+	ion-content {
+		ion-card h5 {
+			
+		color: #7aa9f4;
+		}
+		ion-row.item {
+			border-bottom: 1px solid #ededed;
+			
+			ion-card-header {
+				color: #7aa9f4;
+			}
+		}
+		ion-row.item-left {
+			border-right: 1px solid #ededed;
+		}
+	}
+}

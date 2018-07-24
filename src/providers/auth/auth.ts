@@ -11,7 +11,7 @@ import {environment} from '../../envrionment';
 @Injectable()
 export class AuthProvider {
   api_url = environment.site_url+environment.jwt_url;
-
+  user;
   constructor(public http: HttpClient) {
     console.log('Hello AuthProvider Provider');
   }
@@ -24,7 +24,9 @@ export class AuthProvider {
 
     let headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
+
     return this.http.post(this.api_url, data, {headers: headers});
+    
   }
   
   

@@ -6,11 +6,13 @@
   </ion-header>
   
    <ion-content class="card-background-page">
-	<ion-card>
-      <img src="./assets/images/2.png" />
+	<div class="menu-header">
+      <!--material-design-background-->
+      <img class="user-avatar round" [src]="userImage || placeholder" onerror="this.src='assets/images/user.png'" />
       <div class="card-title">T-WORK SYSTEM</div>
-      <div class="card-subtitle">Find Your Journey</div>
-    </ion-card>
+    <p class="email">{{useremail}}</p>
+    </div>
+    
     <ion-list>
 		
 		<button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">

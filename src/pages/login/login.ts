@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {AuthProvider} from '../../providers/auth/auth';
 
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -30,10 +31,12 @@ export class LoginPage {
   }
 
   onLogin(){
-    //console.log(this.username, this.password);
+    console.log(this.username, this.password);
     this.authProvider.postLogin(this.username, this.password).subscribe(data => {
-      console.log(data);
+      //console.log(data);
       localStorage.setItem('wpIonicToken', JSON.stringify(data));
+      let user = data;
+      localStorage.setItem('userEmail', JSON.stringify(user));
       this.navCtrl.setRoot('TabsPage');
     });
   }

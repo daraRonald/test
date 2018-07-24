@@ -36,8 +36,13 @@
 		
 		<ion-card>
 			<ion-label color="primary" id="product-image">Product Image :</ion-label>
-			 
-			  <img [src]="productimage ? productimage : placeholder_picture" (click)="getPhoto()">
+			<div *ngIf="productimageNew">
+				<img [src]="productimageNew" (click)="getPhoto()">
+			</div>
+			<div *ngIf="!productimageNew">
+				<img [src]="productimage ? productimage : placeholder_picture" (click)="getPhoto()">
+			</div>  
+			  
 			
 		</ion-card>
     </ion-list>

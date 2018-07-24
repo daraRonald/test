@@ -1,0 +1,166 @@
+<ion-header>
+
+  <ion-navbar>
+	<button ion-button menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Dashboard</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<div *ngFor="let tech of technologies">
+		<ion-card> 
+			<ion-row class="item">
+				<div col-4>
+					<img src="assets/images/total-sales.png" />
+				</div>
+				<div col-8>
+					<ion-card-header>
+					  Total Sales
+					</ion-card-header>
+					<ion-card-content >
+					 {{tech.total_sales}}
+					</ion-card-content>
+				</div>
+			</ion-row>
+			
+			<ion-row class="item">
+				<div col-6>
+					<ion-row class="item-left">
+						<div col-3>
+							<img src="assets/images/daily-sale.png" />
+						</div>
+						<div col-9>
+							<h5>
+							  Daily Net Sales
+							</h5>
+							<p>
+							 {{tech.net_sales}}
+							</p>
+						</div>
+					</ion-row>
+				</div>
+				<div col-6>
+					<ion-row>
+						<div col-3>
+							<img src="assets/images/avg.png" />
+						</div>
+						<div col-9>
+							<h5>
+							  Daily Average Sales
+							</h5>
+							<p>
+							 {{tech.average_sales}}
+							</p>
+						</div>
+					</ion-row>
+				</div>
+			</ion-row>
+			
+			<ion-row>
+				<div col-6>
+					<ion-row class="item-left">
+						<div col-3>
+							<img src="assets/images/tax.png" />
+						</div>
+						<div col-9>
+							<h5>
+							  Total Tax
+							</h5>
+							<p>
+							 {{tech.total_tax}}
+							</p>
+						</div>
+					</ion-row>
+				</div>
+				<div col-6>
+					<ion-row>
+						<div col-3>
+							<img src="assets/images/shipping.png" />
+						</div>
+						<div col-9>
+							<h5>
+							  Total Shipping
+							</h5>
+							<p>
+							 {{tech.total_shipping}}
+							</p>
+						</div>
+					</ion-row>
+				</div>
+			</ion-row>
+		 </ion-card>
+		 
+		 <ion-card> 
+			<ion-row class="item">
+				<div col-6>
+					<ion-row class="item-left">
+						<div col-3>
+							<img src="assets/images/order.png" />
+						</div>
+						<div col-9>
+							<h5>
+							  Order Fullfilled
+							</h5>
+							<p>
+							 {{tech.total_orders}}
+							</p>
+						</div>
+					</ion-row>
+				</div>
+				<div col-6>
+					<ion-row>
+						<div col-3>
+							<img src="assets/images/refund.png" />
+						</div>
+						<div col-9>
+							<h5>
+							  Total Refunds
+							</h5>
+							<p>
+							 {{tech.total_refunds}}
+							</p>
+						</div>
+					</ion-row>
+				</div>
+			</ion-row>
+			
+			<ion-row>
+				<div col-6>
+					<ion-row class="item-left">
+						<div col-3>
+							<img src="assets/images/item.png" />
+						</div>
+						<div col-9>
+							<h5>
+							  Item Solds
+							</h5>
+							<p>
+							 {{tech.total_items}}
+							</p>
+						</div>
+					</ion-row>
+				</div>
+				<div col-6>
+					<ion-row>
+						<div col-3>
+							<img src="assets/images/customer.jpg" />
+						</div>
+						<div col-9>
+							<h5>
+							  New Customers
+							</h5>
+							<p>
+							 {{tech.total_customers}}
+							</p>
+						</div>
+					</ion-row>
+				</div>
+			</ion-row>
+		 </ion-card>
+	 </div>
+
+</ion-content>

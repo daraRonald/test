@@ -1,3 +1,60 @@
 page-login {
 
+  $transparent-white: rgba(255, 255, 255, .6);
+  ion-content {
+    background: linear-gradient(135deg, #b8c2d8, #667aa3, #627fba, #5f83cc, #5984db, #4a7ee8, #3872ea, #2868ed, #135bf2, #0452f4);
+    background-size: 1800% 1800%;
+    animation: rainbow 20s linear infinite;
+  }
+  @keyframes rainbow {
+    0% {
+      background-position: 0% 0%
+    }
+    50% {
+      background-position: 100% 100%
+    }
+    100% {
+      background-position: 0% 0%
+    }
+  }
+  // Content
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .logo {
+    width: 25%;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 50px;
+    border-radius: 30%;
+  }
+  // Input items
+  ion-item {
+    border-radius: 3px !important;
+    padding-left: 10px !important;
+    margin-bottom: 15px !important;
+    margin-bottom: 10px;
+    color: #fff !important;
+    background-color: rgba(255, 255, 255, .2) !important;
+    font-size: 0.9em;
+  }
+   ::-webkit-input-placeholder {
+    color: white !important;
+  }
+  .item-inner {
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+  }
+  // --
+  .login-button {
+    text-transform: none;
+    border-radius: 3px !important;
+  }
+  // Facebook icon
+  ion-icon {
+    padding-right: 10px;
+    font-size: 2.2rem;
+  }
 }

@@ -1,4 +1,5 @@
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Posts" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>
+  <ion-tab [root]="tab1Root" tabTitle="Dashboard" tabIcon="globe" [rootParams]="fooId"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Order" tabIcon="clipboard" [rootParams]="fooId"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Review" tabIcon="bookmarks" [rootParams]="fooId"></ion-tab>
 </ion-tabs>
