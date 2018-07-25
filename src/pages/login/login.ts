@@ -31,11 +31,12 @@ export class LoginPage {
   }
 
   onLogin(){
-    console.log(this.username, this.password);
+    //console.log(this.username, this.password);
     this.authProvider.postLogin(this.username, this.password).subscribe(data => {
-      //console.log(data);
+	alert(JSON.stringify(data.user_email));
+      console.log(data);
       localStorage.setItem('wpIonicToken', JSON.stringify(data));
-      let user = data.user_email;
+      let user = data['user_email'];
       localStorage.setItem('userEmail', JSON.stringify(user));
       this.navCtrl.setRoot('TabsPage');
     });
