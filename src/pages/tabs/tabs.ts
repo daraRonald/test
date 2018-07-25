@@ -45,7 +45,7 @@ export class TabsPage {
    	
 	setTimeout(() => {
 		loading.dismiss();
-	  }, 5000);
+	  }, 10000);
 
 	this.wordpressProvider.getTopseller().subscribe(data => {
       console.log(data);

@@ -11,7 +11,9 @@
 
 
 <ion-content padding>
-	<div *ngFor="let tech of technologies">
+	<button ion-button full round (click)="onButtonClick()">Top 10 Best Seller Products</button>
+	
+	<div *ngFor="let tech of technologies" [hidden]= "!toggoleShowHide">
 		<ion-card> 
 			<ion-row class="item">
 				<div col-4>
@@ -162,5 +164,10 @@
 			</ion-row>
 		 </ion-card>
 	 </div>
+	 
+	 <div [hidden]= "toggoleShowHide">
+		<canvas #doughnutCanvas></canvas>
+	  </div>
 
+	
 </ion-content>

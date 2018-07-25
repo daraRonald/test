@@ -34,7 +34,7 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.username= localStorage.getItem('userName');
+      //this.username= localStorage.getItem('userName');
       this.useremail= localStorage.getItem('userEmail');
       this.statusBar.styleDefault();
       this.splashScreen.hide();

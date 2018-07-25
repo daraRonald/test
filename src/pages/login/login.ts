@@ -35,7 +35,7 @@ export class LoginPage {
     this.authProvider.postLogin(this.username, this.password).subscribe(data => {
       //console.log(data);
       localStorage.setItem('wpIonicToken', JSON.stringify(data));
-      let user = data;
+      let user = data.user_email;
       localStorage.setItem('userEmail', JSON.stringify(user));
       this.navCtrl.setRoot('TabsPage');
     });

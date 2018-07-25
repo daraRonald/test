@@ -11,13 +11,21 @@
 
 
 <ion-content padding>
-	   <ion-card>
-		   <ion-card-header>
-			Doughnut Chart
-		   </ion-card-header>
-	   </ion-card>
-		  <div>
-			<canvas #doughnutCanvas></canvas>
-		  </div>
+	<ion-list>
+	  <ion-item color='primary'>
+		<ion-label><h2>Filter By</h2></ion-label>
+		<ion-select #C (ionChange)="onChange(C.value)">
+
+		  <ion-option value="week" selected>Week</ion-option>
+		  <ion-option value="month">Month</ion-option>
+		  <ion-option value="last_month">Last Month</ion-option>
+		</ion-select>
+	  </ion-item>
+	  
+	</ion-list>
+
+  <div>
+	<canvas #doughnutCanvas></canvas>
+  </div>
 	   
 </ion-content>

@@ -1,3 +1,13 @@
 page-review {
-
+	ion-content {
+		ion-list {
+			ion-item {
+				border-radius: 5px;
+				ion-label h2{
+					color: #fff;
+					padding : 2px;
+				}
+			}
+		}
+	}
 }

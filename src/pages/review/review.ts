@@ -12,9 +12,13 @@ export class ReviewPage {
   @ViewChild('doughnutCanvas') doughnutCanvas;
   doughnutChart: any;
   ordersData;
-  chartLabels;
-  chartValues;
+  filterBestseller;
+  chartLabels               : any    = [];
+  chartValues               : any    = [];
+  arrayLabels               : any    = [];
+  arrayValue               : any    = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,public wordpressProvider: WordpressProvider) {
+	
   }
 
   ionViewDidLoad() {
@@ -25,7 +29,7 @@ export class ReviewPage {
 	console.log(this.chartValues);
     
     this.defineChartData();
-	//this.createBarChart();
+    
   }
 
 
@@ -39,44 +43,11 @@ export class ReviewPage {
             data: {
                 labels: this.chartLabels,
                 datasets: [{
-                    label: this.chartValues,
+                    label: this.arrayValue,
                     data: this.chartValues,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)'
-                    ],
-                    hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56",
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56",
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56",
-                        "#FF6384"
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.5)',
-                        'rgba(255, 206, 86, 0.5)',
-                        'rgba(75, 192, 192, 0.5)',
-                        'rgba(153, 102, 255, 0.5)',
-                        'rgba(255, 159, 64, 0.5)',
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.5)',
-                        'rgba(255, 206, 86, 0.5)',
-                        'rgba(75, 192, 192, 0.5)'
-                    ],
+                    backgroundColor: 'rgba(18, 141, 229, 0.2)',
+                    hoverBackgroundColor: "#128de5",                       
+                    borderColor: 'rgba(18, 141, 229, 0.5)',
 					borderWidth: 1
                 }]
             },
@@ -85,7 +56,7 @@ export class ReviewPage {
 				  rotation: Math.PI,
 				  cutoutPercentage: 30,
 				  legend: {
-					display: true,
+					display: false,
 					position: 'left',
 					
 				  },
@@ -96,17 +67,39 @@ export class ReviewPage {
 					animateRotate: true,
 					animateScale: true
 				  },
-				  title: {
-					display: true,
-					text: 'Top Seller Rate During 1 Month.'
-				  }
-				  
+						  
 			
 			 }
  
         });
- 
+		
+		
 	   }
- 
+	
+	  
+	  onChange(value) {
+		console.log(value);
+		this.wordpressProvider.getTopsellerByFilter(value).subscribe(data => {
+		  console.log(data);
+		  this.ordersData= data;
+		  this.chartLabels = [];
+		  this.chartValues = [];
+		  let k:any;
+			for(k in this.ordersData) {
+				var tech  =      this.ordersData[k];
+
+				 
+				this.chartLabels.push(tech.name);
+				this.chartValues.push(tech.quantity);
+				
+			}
+			console.log(this.chartLabels);
+			console.log(this.chartValues);
+		
+			this.doughnutChart.data.labels = this.chartLabels;
+			this.doughnutChart.data.datasets[0].data = this.chartValues;
+			this.doughnutChart.update();
+		});
+	  }
   
 }

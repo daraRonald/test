@@ -322,7 +322,19 @@ export class WordpressProvider {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-  let url = this.api_url_report + '/top_sellers?period=month';
+  let url = this.api_url_report + '/top_sellers?period=week';
+	return this.http.get(url, {headers: headers} );
+  }
+  
+   getTopsellerByFilter(filter) {
+	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+	  console.log(token);
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  let url = this.api_url_report + '/top_sellers?period=' + filter;
 	return this.http.get(url, {headers: headers} );
   }
   
