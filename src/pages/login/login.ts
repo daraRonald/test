@@ -36,7 +36,7 @@ export class LoginPage {
       console.log(data);
       localStorage.setItem('wpIonicToken', JSON.stringify(data));
       
-      localStorage.setItem('userEmail', JSON.stringify(data.user_email);
+      localStorage.setItem('userEmail', JSON.stringify(data.user_email));
       this.navCtrl.setRoot('TabsPage');
     });
   }
