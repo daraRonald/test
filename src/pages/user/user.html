@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+	<button ion-button menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>User Lists</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onGoToCreateUser()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list>
+	  <ion-item *ngFor="let user of users">
+		<ion-avatar item-start>
+		  <img [src]="user.avatar_urls[96]">
+		</ion-avatar>
+		<h2>{{user.name}}</h2>
+		<p>{{user.description}}</p>
+	  </ion-item>
+	</ion-list>
+</ion-content>

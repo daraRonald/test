@@ -1,7 +1,7 @@
 import { Component ,ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
-import { WordpressProvider} from '../../providers/wordpress/wordpress';
+import { WordpressProvider } from '../../providers/wordpress/wordpress';
 
 
 @IonicPage()
@@ -110,11 +110,12 @@ export class DashboardPage {
 				  }, 
 				  animation: {
 					animateRotate: true,
-					animateScale: true
+					animateScale: true,
+					duration: 5000
 				  },
 				  title: {
 					display: true,
-					text: 'Top Seller Rate During 1 Month.'
+					text: 'Top Seller Rate'
 				  }
 				  
 			

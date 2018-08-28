@@ -28,14 +28,15 @@ export class MyApp {
       { title: 'Posts', component: 'PostsPage' },
       { title: 'Products', component: 'WooListPage' },
       { title: 'Orders', component: 'OrderPage' },
+      { title: 'Users', component: 'UserPage' },
     ];
 
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      //this.username= localStorage.getItem('userName');
-      this.useremail= localStorage.getItem('userEmail');
+      this.username= localStorage.getItem('userEmail');
+      //this.useremail= localStorage.getItem('userEmail');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       

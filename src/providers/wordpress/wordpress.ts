@@ -244,7 +244,7 @@ export class WordpressProvider {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-  let url = this.api_url_order;
+  let url = this.api_url_order + '?per_page=100';
 	return this.http.get(url, {headers: headers} );
   }
   
@@ -336,6 +336,38 @@ export class WordpressProvider {
     });
   let url = this.api_url_report + '/top_sellers?period=' + filter;
 	return this.http.get(url, {headers: headers} );
+  }
+  
+  getUsers() {
+	let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+	  console.log(token);
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  let url = this.api_url + 'users';
+	return this.http.get(url, {headers: headers} );
+  }
+  
+  createUsers(username, name, email, password, role){
+    let data = {
+      username: username,
+      name: name,
+      email: email,
+      password: password,
+      roles: role,
+    };
+    console.log(data);
+
+    let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+    console.log(token);
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post(this.api_url + 'users', data, {headers: headers});
   }
   
 }

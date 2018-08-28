@@ -20,6 +20,8 @@ import 'rxjs/add/observable/forkJoin';
 })
 export class OrderDetailPage {
  
+  orderform: string = "order-item";
+  
   order: any;
   items: any;
   billing: any;
